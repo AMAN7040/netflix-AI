@@ -1,11 +1,14 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import { validateEmail, validatePassword } from "../utils/validate";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [more, setMore] = useState(false);
   const [isSignedIn, setSignedIn] = useState(true);
   const [emailError, setemailError] = useState('');
+  const [authError, setAuthError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [nameError, setNameError] = useState('');
   const email = useRef(null);
@@ -50,18 +53,49 @@ const Login = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const handleButton = () => {
     handleName();
     handleEmailError();
     handlePasswordError();
 
-    if (!isSignedIn && !nameError && !emailError && !passwordError) {
-      console.log("Sign up form submitted", name.current.value, email.current.value, password.current.value);
-    } else if (isSignedIn && !emailError && !passwordError) {
-      console.log("Sign-in successfully", email.current.value, password.current.value);
-    } else {
-      console.log('Cannot Sign in or login in');
+    // if (!isSignedIn && !nameError && !emailError && !passwordError) {
+    //   console.log("Sign up form submitted", name.current.value, email.current.value, password.current.value);
+    // } else if (isSignedIn && !emailError && !passwordError) {
+    //   console.log("Sign-in successfully", email.current.value, password.current.value);
+    // } else {
+    //   console.log('Cannot Sign in or login in');
+    // }
+    if(nameError || emailError || passwordError) return
+
+    if(!isSignedIn){
+     //Signup logic
+     createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+     .then((userCredential)=>{
+      //signed up
+      const user = userCredential.user;
+      console.log(user);
+     })
+     .catch((error)=>{
+      setAuthError('Sorry failed to create a account. Please try again');
+     });
+     
     }
-  };
+    else{
+     //sign in logic
+     signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+     .then((userCredential)=>{
+      const user = userCredential.user;
+      console.log(user);
+     })
+     .catch((error)=>{
+      
+      setAuthError(`Incorrect password for ${email.current.value} Or User doesn't exist. You can reset your password or try again.`);
+     })
+
+    }
+  }
 
   return (
     <section className=" absolute w-full h-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/cacfadb7-c017-4318-85e4-7f46da1cae88/e43aa8b1-ea06-46a5-abe3-df13243e718d/IN-en-20240603-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-center bg-cover">
@@ -71,9 +105,10 @@ const Login = () => {
           onSubmit={handleSubmit}
           className="absolute bg-black m-32 mx-auto py-10 pr-16 pl-10 right-0 left-0 w-3/12  rounded-lg opacity-75 "
         >
-          <h1 className="text-3xl font-bold text-white mb-10 mx-4">
+          <h1 className="text-3xl font-bold text-white mb-7 mx-4">
             {isSignedIn ? "Sign-in" : "Signup"}
           </h1>
+          {authError && <p style={{ color: '#ffff00' }} className="px-4 mb-4">{authError}</p>}
           {!isSignedIn && (
             <>
               <input
@@ -83,9 +118,10 @@ const Login = () => {
               placeholder="Enter your Name"
               onBlur={handleName}
               className={`bg-black w-full py-3 px-3 mx-4 mb-3 border rounded-md opacity-90 text-white ${nameError ? 'border-red-500' : 'border-gray-300'}`}
-              required 
-            />
-            {nameError && <p className="text-red-500 px-4 mb-2">{nameError}</p>}
+              style={nameError ? { borderColor: '#ff0000' } : { borderColor: 'gray' }}
+              required
+          />
+          {nameError && <p style={{ color: '#ff0000' }} className="px-4 mb-2">{nameError}</p>}
             </>
           )}
           <input
@@ -95,22 +131,26 @@ const Login = () => {
             placeholder="Enter your Email"
             onBlur={handleEmailError}
             className={`bg-black w-full py-3 px-3 mx-4 mb-3 border rounded-md opacity-90 text-white ${emailError ? 'border-red-500' : 'border-gray-300'}`}
+            style={emailError ? { borderColor: '#ff0000' } : { borderColor: 'gray' }}
             required
           />
-           {emailError && <p className="text-red-500 px-4 mb-2">{emailError}</p>}
+          {emailError && <p style={{ color: '#ff0000' }} className="px-4 mb-2">{emailError}</p>}
           <input
             type="password"
             ref={password}
             id="password"
             placeholder="Enter your password"
             onBlur={handlePasswordError}
-            className={`bg-black w-full py-3 px-3 mx-4 mb-3 border rounded-md opacity-90 text-white ${passwordError ? 'border-red-500' : 'border-gray-300'}`}
+            className={`bg-black w-full py-3 px-3 mx-4 mb-3 border rounded-md opacity-90 text-white `}
+            style={passwordError ? { borderColor: '#ff0000' } : { borderColor: 'gray' }}
             required
           />
-          {passwordError && <p className="text-red-500 px-4 mb-2">{passwordError}</p>}
+          {passwordError && <p style={{ color: '#ff0000' }} className="px-4 mb-2">{passwordError}</p>}
           <button
             type="submit"
-            className="w-full bg-red-600 text-white py-3 px-3 mb-5 mx-4 rounded-md cursor-pointer"
+            onClick={handleButton}
+            style={{ backgroundColor: '#ff0000' }}
+            className="w-full text-white py-2 px-3 mb-5 mx-4 rounded-md cursor-pointer"
           >
             {isSignedIn ? "Sign-in" : "Signup"}
           </button>
