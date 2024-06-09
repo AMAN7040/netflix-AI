@@ -1,22 +1,28 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import { validateEmail, validatePassword } from "../utils/validate";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [more, setMore] = useState(false);
   const [isSignedIn, setSignedIn] = useState(true);
-  const [emailError, setemailError] = useState('');
-  const [authError, setAuthError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-  const [nameError, setNameError] = useState('');
+  const [emailError, setemailError] = useState("");
+  const [authError, setAuthError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [nameError, setNameError] = useState("");
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
 
   const toggleForm = () => {
     setSignedIn(!isSignedIn);
@@ -27,30 +33,31 @@ const Login = () => {
   };
 
   const handleEmailError = () => {
-    const emailValue = email.current ? email.current.value : '';
+    const emailValue = email.current ? email.current.value : "";
     if (!validateEmail(emailValue)) {
-      setemailError('Please enter a valid Email');
+      setemailError("Please enter a valid Email");
     } else {
-      setemailError('');
+      setemailError("");
     }
   };
 
   const handlePasswordError = () => {
-    const passwordValue = password.current ? password.current.value : '';
-    if(!validatePassword(passwordValue)){
-      setPasswordError('Your Password must be at least 6 characters, contain at least 1 uppercase & 1 lowercase letter, and 1 digit');
-    }
-    else{
-      setPasswordError('');
+    const passwordValue = password.current ? password.current.value : "";
+    if (!validatePassword(passwordValue)) {
+      setPasswordError(
+        "Your Password must be at least 6 characters, contain at least 1 uppercase & 1 lowercase letter, and 1 digit"
+      );
+    } else {
+      setPasswordError("");
     }
   };
 
   const handleName = () => {
-    const nameValue = name.current? name.current.value : '';
-    if (nameValue.trim() === '') {
-      setNameError('Please enter your name');
+    const nameValue = name.current ? name.current.value : "";
+    if (nameValue.trim() === "") {
+      setNameError("Please enter your name");
     } else {
-      setNameError('');
+      setNameError("");
     }
   };
   const handleSubmit = (e) => {
@@ -69,37 +76,56 @@ const Login = () => {
     // } else {
     //   console.log('Cannot Sign in or login in');
     // }
-    if(nameError || emailError || passwordError) return
+    if (nameError || emailError || passwordError) return;
 
-    if(!isSignedIn){
-     //Signup logic
-     createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
-     .then((userCredential)=>{
-      //signed up
-      const user = userCredential.user;
-      console.log(user);
-      navigate('/browse');
-     })
-     .catch((error)=>{
-      setAuthError('Sorry failed to create a account. Please try again');
-     });
-     
+    if (!isSignedIn) {
+      //Signup logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          //signed up
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+          })
+            .then(() => {
+              const { uid, email, displayName } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setAuthError(error.message);
+            });
+        })
+        .catch((error) => {
+          setAuthError("Sorry failed to create a account. Please try again");
+        });
+    } else {
+      //sign in logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          navigate("/browse");
+        })
+        .catch((error) => {
+          setAuthError(
+            `Incorrect password for ${email.current.value} Or User doesn't exist. You can reset your password or try again.`
+          );
+        });
     }
-    else{
-     //sign in logic
-     signInWithEmailAndPassword(auth, email.current.value, password.current.value)
-     .then((userCredential)=>{
-      const user = userCredential.user;
-      console.log(user);
-      navigate('/browse');
-     })
-     .catch((error)=>{
-      
-      setAuthError(`Incorrect password for ${email.current.value} Or User doesn't exist. You can reset your password or try again.`);
-     })
-
-    }
-  }
+  };
 
   return (
     <section className=" absolute w-full h-screen bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/cacfadb7-c017-4318-85e4-7f46da1cae88/e43aa8b1-ea06-46a5-abe3-df13243e718d/IN-en-20240603-popsignuptwoweeks-perspective_alpha_website_large.jpg')] bg-center bg-cover">
@@ -112,20 +138,34 @@ const Login = () => {
           <h1 className="text-3xl font-bold text-white mb-7 mx-4">
             {isSignedIn ? "Sign-in" : "Signup"}
           </h1>
-          {authError && <p style={{ color: '#ffff00' }} className="px-4 mb-4">{authError}</p>}
+          {authError && (
+            <p style={{ color: "#ffff00" }} className="px-4 mb-4">
+              {authError}
+            </p>
+          )}
           {!isSignedIn && (
             <>
               <input
-              type="text"
-              id="name"
-              ref={name}
-              placeholder="Enter your Name"
-              onBlur={handleName}
-              className={`bg-black w-full py-3 px-3 mx-4 mb-3 border rounded-md opacity-90 text-white ${nameError ? 'border-red-500' : 'border-gray-300'}`}
-              style={nameError ? { borderColor: '#ff0000' } : { borderColor: 'gray' }}
-              required
-          />
-          {nameError && <p style={{ color: '#ff0000' }} className="px-4 mb-2">{nameError}</p>}
+                type="text"
+                id="name"
+                ref={name}
+                placeholder="Enter your Name"
+                onBlur={handleName}
+                className={`bg-black w-full py-3 px-3 mx-4 mb-3 border rounded-md opacity-90 text-white ${
+                  nameError ? "border-red-500" : "border-gray-300"
+                }`}
+                style={
+                  nameError
+                    ? { borderColor: "#ff0000" }
+                    : { borderColor: "gray" }
+                }
+                required
+              />
+              {nameError && (
+                <p style={{ color: "#ff0000" }} className="px-4 mb-2">
+                  {nameError}
+                </p>
+              )}
             </>
           )}
           <input
@@ -134,11 +174,19 @@ const Login = () => {
             id="email"
             placeholder="Enter your Email"
             onBlur={handleEmailError}
-            className={`bg-black w-full py-3 px-3 mx-4 mb-3 border rounded-md opacity-90 text-white ${emailError ? 'border-red-500' : 'border-gray-300'}`}
-            style={emailError ? { borderColor: '#ff0000' } : { borderColor: 'gray' }}
+            className={`bg-black w-full py-3 px-3 mx-4 mb-3 border rounded-md opacity-90 text-white ${
+              emailError ? "border-red-500" : "border-gray-300"
+            }`}
+            style={
+              emailError ? { borderColor: "#ff0000" } : { borderColor: "gray" }
+            }
             required
           />
-          {emailError && <p style={{ color: '#ff0000' }} className="px-4 mb-2">{emailError}</p>}
+          {emailError && (
+            <p style={{ color: "#ff0000" }} className="px-4 mb-2">
+              {emailError}
+            </p>
+          )}
           <input
             type="password"
             ref={password}
@@ -146,14 +194,22 @@ const Login = () => {
             placeholder="Enter your password"
             onBlur={handlePasswordError}
             className={`bg-black w-full py-3 px-3 mx-4 mb-3 border rounded-md opacity-90 text-white `}
-            style={passwordError ? { borderColor: '#ff0000' } : { borderColor: 'gray' }}
+            style={
+              passwordError
+                ? { borderColor: "#ff0000" }
+                : { borderColor: "gray" }
+            }
             required
           />
-          {passwordError && <p style={{ color: '#ff0000' }} className="px-4 mb-2">{passwordError}</p>}
+          {passwordError && (
+            <p style={{ color: "#ff0000" }} className="px-4 mb-2">
+              {passwordError}
+            </p>
+          )}
           <button
             type="submit"
             onClick={handleButton}
-            style={{ backgroundColor: '#ff0000' }}
+            style={{ backgroundColor: "#ff0000" }}
             className="w-full text-white py-2 px-3 mb-5 mx-4 rounded-md cursor-pointer"
           >
             {isSignedIn ? "Sign-in" : "Signup"}
