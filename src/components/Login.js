@@ -3,6 +3,7 @@ import Header from "./Header";
 import { validateEmail, validatePassword } from "../utils/validate";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [more, setMore] = useState(false);
@@ -14,6 +15,7 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
+  const navigate = useNavigate();
 
 
   const toggleForm = () => {
@@ -76,6 +78,7 @@ const Login = () => {
       //signed up
       const user = userCredential.user;
       console.log(user);
+      navigate('/browse');
      })
      .catch((error)=>{
       setAuthError('Sorry failed to create a account. Please try again');
@@ -88,6 +91,7 @@ const Login = () => {
      .then((userCredential)=>{
       const user = userCredential.user;
       console.log(user);
+      navigate('/browse');
      })
      .catch((error)=>{
       
