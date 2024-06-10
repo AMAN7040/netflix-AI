@@ -126,7 +126,7 @@ const Login = () => {
   };
 
   return (
-    <section className=" w-full h-screen  bg-center bg-cover" style={{ backgroundImage: `url('${BACKGROUND_IMAGE_URL}')` }}>
+    <section className=" w-full h-screen bg-center bg-cover" style={{ backgroundImage: `url('${BACKGROUND_IMAGE_URL}')` }}>
       <div className="w-full h-full bg-[rgba(0,0,0,0.5)]">
         <Header />
         <form

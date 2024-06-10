@@ -6,10 +6,10 @@ const VideoBg = ({ movieId }) => {
   useMovieTrailer(movieId);
 
   return (
-    <div className="w-screen h-screen ">
+    <div className="w-screen">
       {trailer ? (
         <iframe
-          className="aspect-video w-screen h-screen "
+          className="aspect-video w-screen  "
           src={
             "https://www.youtube.com/embed/" +
             trailer?.key +
@@ -17,7 +17,7 @@ const VideoBg = ({ movieId }) => {
           }
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
+          // referrerPolicy="strict-origin-when-cross-origin"
         ></iframe>
       ) : (
         <p>Loading trailer...</p>
