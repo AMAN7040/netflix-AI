@@ -1,32 +1,56 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NETFLIX_LOGO } from "../utils/constant";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faBell } from "@fortawesome/free-solid-svg-icons";
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, removeUser } from "../utils/userSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
 
+  //Signout logic when user clicks on signout button
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {
-        navigate("/");
-      })
+      .then(() => {})
       .catch((error) => {
-        // An error happened.
+        navigate('/error');
       });
   };
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+          })
+        );
+        navigate("/browse");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+
+    //unsubscribing 
+    return () => unsubscribe();
+    
+  }, []);
+
   return (
-    <div className="absolute py-2 px-60 flex w-full">
+    <div className="absolute py-2 px-60 flex w-full z-40">
       <img className="w-44" src={NETFLIX_LOGO} alt="LOGO" />
       {user && (
         <div className="flex justify-between w-full m-5 p-1">
-          <ul className="flex text-black space-x-8 font-semibold text-lg mx-10 items-center">
+          <ul className="flex text-white space-x-8 font-semibold text-lg mx-10 items-center">
             <li className="cursor-pointer">Home</li>
             <li className="cursor-pointer">TV Shows</li>
             <li className="cursor-pointer">Movies</li>
@@ -36,11 +60,11 @@ const Header = () => {
           <div className="flex justify-evenly h-10 items-center">
             <FontAwesomeIcon
               icon={faMagnifyingGlass}
-              className="text-black cursor-pointer mx-4 text-xl"
+              className="text-white cursor-pointer mx-4 text-xl"
             />
             <FontAwesomeIcon
               icon={faBell}
-              className="text-black cursor-pointer mx-4 text-xl"
+              className="text-white cursor-pointer mx-4 text-xl"
             />
             <button
               type="submit"
