@@ -1,10 +1,11 @@
 import { API_OPTIONS } from "../utils/constant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNowPlayingMovies } from "../utils/moviesSlice";
 import { useEffect } from "react";
 
 const useNowPlayingMovies = () => {
 
+  const nowPlayingMovies = useSelector((store)=> store.movies.nowPlayingMovies);
     //fetch the data from tmdb and update the redux store
   const dispatch = useDispatch();
 
@@ -18,7 +19,7 @@ const useNowPlayingMovies = () => {
   };
 
   useEffect(() => {
-    getNowPlayingMovies();
+    !nowPlayingMovies && getNowPlayingMovies();
   }, []);
 };
 

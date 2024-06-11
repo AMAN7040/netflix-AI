@@ -5,12 +5,13 @@ import GbtMovieSuggestions from './GbtMovieSuggestions'
 
 const GbtSearch = () => {
   return (
-    <div className=" w-full h-screen bg-center bg-cover" style={{ backgroundImage: `url('${BACKGROUND_IMAGE_URL}')` }}>
-         <div className='bg-[rgba(0,0,0,0.7)] h-screen text-white'>
+   <div>
+     <div className=" w-full h-screen fixed bg-center bg-cover" style={{ backgroundImage: `url('${BACKGROUND_IMAGE_URL}')` }}></div>
+     <div className='bg-[rgba(0,0,0,0.7)] h-screen  text-white'>
           <GbtSearchBar/>
           <GbtMovieSuggestions/>
-        </div>
-    </div>
+     </div>
+   </div>
   )
 }
 

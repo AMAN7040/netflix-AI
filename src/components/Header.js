@@ -86,16 +86,16 @@ const Header = () => {
             </select>
             <button
               onClick={handleGbtToggle}
-              className="w-[20%] text-white text-md rounded-md cursor-pointer flex  justify-center items-center border mx-2 px-3 border-white hover:bg-gray-50 hover:bg-opacity-15"
+              className="w-[20%]  text-white text-lg rounded-md cursor-pointer flex  justify-center items-center border mx-2 px-3 border-white hover:bg-gray-50 hover:bg-opacity-15"
             >
               {showGbtSearch ? (
                 lang[langType].home
               ) : (
                 <>
-                  {lang[langType].gbt}
+                  {lang[langType].ai}
                   <FontAwesomeIcon
                     icon={faMagnifyingGlass}
-                    className="text-white cursor-pointer mx-2 text-md"
+                    className="text-white cursor-pointer mx-2 text-md my-1"
                   />
                 </>
               )}

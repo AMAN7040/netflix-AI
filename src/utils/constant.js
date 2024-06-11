@@ -1,3 +1,17 @@
+const HarmCategory = {
+  HATE_SPEECH: 'HATE_SPEECH',
+  HARASSMENT: 'HARASSMENT',
+  SEXUALLY_EXPLICIT: 'SEXUALLY_EXPLICIT',
+  DANGEROUS_CONTENT: 'DANGEROUS_CONTENT'
+};
+
+const HarmBlockThreshold = {
+  BLOCK_NONE: 'BLOCK_NONE',
+  BLOCK_MODERATE: 'BLOCK_MODERATE',
+  BLOCK_HIGH: 'BLOCK_HIGH'
+};
+
+
 export const NETFLIX_LOGO =
   "https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
 
@@ -8,8 +22,7 @@ export const API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmMDA1NTBkNDE3MjI3OTI3ODU1NWI1ODI0NTUzMzBkMyIsInN1YiI6IjY2NjVjZDg5ZTM0MzdjYzVlNWJlNWEzNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.99inGj2p7lR9qV2bTWAY8Ox7k2upnCx92ofu8potTn0",
+    Authorization: `Bearer ${process.env.REACT_APP_TMDB_KEY}`,
   },
 };
 
@@ -22,3 +35,12 @@ export const LANGUAGES = [
   { identifier: "Spanish", name: "español" },
   { identifier: "Japanese", name: "日本語" },
 ];
+
+export const OPEN_AI_KEY = process.env.REACT_APP_OPEN_AI_KEY
+
+export const safetySettings = {
+  [HarmCategory.HATE_SPEECH]: HarmBlockThreshold.BLOCK_NONE,
+  [HarmCategory.HARASSMENT]: HarmBlockThreshold.BLOCK_NONE,
+  [HarmCategory.SEXUALLY_EXPLICIT]: HarmBlockThreshold.BLOCK_NONE,
+  [HarmCategory.DANGEROUS_CONTENT]: HarmBlockThreshold.BLOCK_NONE
+};
