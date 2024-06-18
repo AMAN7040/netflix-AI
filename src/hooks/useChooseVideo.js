@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { addMovieTrailer } from "../utils/moviesSlice";
+import { chooseVideo } from "../utils/chooseSlice";
 
-const useMovieTrailer = (movieId) => {
+const useChooseVideo = (movieId) => {
     const dispatch = useDispatch();
-    const movieTrailer = useSelector((store)=> store.movies.movieTrailer);
-  
+    
+    const currentVideo = useSelector((store)=> store.choose.currentVideo);
 
     const getVideo = async () => {
         try {
@@ -19,15 +19,12 @@ const useMovieTrailer = (movieId) => {
           }
           const data = await response.json();
 
-          const filterData = data.results.filter(
-            (video) => video.type === "Trailer"
+          const filterCurrentVideo = data.results.filter(
+            (video) => video.type === "Clip"
           );
 
-
-          const MovieTrailer = filterData.length ? filterData[0] : data.results[0];
-          dispatch(addMovieTrailer(MovieTrailer))
-
-         
+         const videoClip = filterCurrentVideo.length ? filterCurrentVideo[0] : data.results[0];
+          dispatch(chooseVideo(videoClip));
           
         } catch (error) {
           console.error("Error fetching video data:", error);
@@ -35,11 +32,10 @@ const useMovieTrailer = (movieId) => {
       };
     
     useEffect(() => {
-      if(!movieTrailer){
-        getVideo();
-      }
+       getVideo();
+      
         
-    },[movieId]);
+    },[movieId, currentVideo]);
 }
 
-export default useMovieTrailer
+export default useChooseVideo

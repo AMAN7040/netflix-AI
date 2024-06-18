@@ -8,6 +8,7 @@ import useTopRatedMovies from "../hooks/useTopRatedMovies";
 import useUpComingMovies from "../hooks/useUpComingMovies";
 import { useSelector } from "react-redux";
 import GbtSearch from "./GbtSearch";
+import Footer from "./Footer";
 
 const Browse = () => {
   useNowPlayingMovies();
@@ -26,8 +27,10 @@ const Browse = () => {
         <>
           <FirstContainer />
           <SecondaryContainer />
+          <Footer/>
         </>
       )}
+     
     </div>
   );
 };

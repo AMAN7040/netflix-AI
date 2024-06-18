@@ -4,12 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faBell } from "@fortawesome/free-solid-svg-icons";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { toggleGbtSearch } from "../utils/gbtSlice";
 import { languageChange } from "../utils/configSlice";
 import lang from "../utils/LanguageConstant";
+import { updateRoute } from "../utils/routeSlice";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ const Header = () => {
   const user = useSelector((store) => store.user);
   const langType = useSelector((store) => store.config.lang);
   const showGbtSearch = useSelector((store) => store.gbt.showGbtSearch);
+  const route = useSelector((store)=> store.route.currentRoute);
 
   //Signout logic when user clicks on signout button
   const handleSignOut = () => {
@@ -38,7 +40,7 @@ const Header = () => {
             displayName: displayName,
           })
         );
-        navigate("/browse");
+        navigate("/"+route);
       } else {
         dispatch(removeUser());
         navigate("/");
@@ -47,7 +49,8 @@ const Header = () => {
 
     //unsubscribing
     return () => unsubscribe();
-  }, []);
+  }, [route, dispatch, navigate]);
+
 
   const handleGbtToggle = () => {
     dispatch(toggleGbtSearch());
@@ -57,15 +60,23 @@ const Header = () => {
     dispatch(languageChange(e.target.value));
   };
 
+  const handleRoute = (e) => {
+    dispatch(updateRoute(e));
+    navigate('/'+e);
+  } 
+
   return (
     <div className="absolute py-2 px-60 flex w-screen z-10">
       <img className="w-44" src={NETFLIX_LOGO} alt="LOGO" />
       {user && (
         <div className="flex justify-between w-full m-5 p-1">
           <ul className="flex text-white space-x-7 font-semibold text-md mx-10 items-center w-[45%]">
-            <li className="cursor-pointer w-20 h-8">{lang[langType].home}</li>
-            <li className="cursor-pointer w-20 h-8">{lang[langType].show}</li>
-            <li className="cursor-pointer w-20 h-8">{lang[langType].movie}</li>
+            <li onClick={() => handleRoute('browse')}  className="cursor-pointer w-20 h-8">
+              {lang[langType].home}
+            </li>
+            <li onClick={() => handleRoute('shows')} className="cursor-pointer w-20 h-8">
+               {lang[langType].show}
+             </li>
             <li className="cursor-pointer w-20 h-8">{lang[langType].latest}</li>
             <li className="cursor-pointer w-20 h-8">{lang[langType].mylist}</li>
           </ul>
@@ -88,7 +99,7 @@ const Header = () => {
               onClick={handleGbtToggle}
               className="w-[20%]  text-white text-lg rounded-md cursor-pointer flex  justify-center items-center border mx-2 px-3 border-white hover:bg-gray-50 hover:bg-opacity-15"
             >
-              {showGbtSearch ? (
+              {route=== 'browse' && showGbtSearch ? (
                 lang[langType].home
               ) : (
                 <>

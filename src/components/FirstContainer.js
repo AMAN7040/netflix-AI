@@ -9,7 +9,8 @@ const FirstContainer = () => {
  
   const movies = useSelector((store) => store.movies?.nowPlayingMovies);
 
-  const { randomMovie} = useRandomMovie(movies); // Call the hook unconditionally
+  const { randomMovie} = useRandomMovie(movies);
+ // Call the hook unconditionally
 
   if (!movies || !randomMovie)return null;
 

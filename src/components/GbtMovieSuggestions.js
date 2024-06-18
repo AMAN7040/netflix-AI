@@ -4,7 +4,7 @@ import MovieList from "./MovieList";
 
 const GbtMovieSuggestions = () => {
   const { movieNames, movieContent } = useSelector((store) => store.gbt);
-  if(!movieNames) return null;
+  if(!movieNames) return ;
   return (
     <div className="bg-black opacity-85">
       <div>
