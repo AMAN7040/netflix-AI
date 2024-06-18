@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Header from "./Header";
 import useTvshowVideo from "../hooks/useTvshowVideo";
 import useChooseShow from "../hooks/useChooseShow";
+import Footer from './Footer'
 
 const ChooseShow = () => {
   const { currentShow, tvshowVideo } = useSelector((store) => store.choose);
@@ -82,6 +83,7 @@ const ChooseShow = () => {
           </div>
         </>
       )}
+      <Footer/>
     </div>
   );
 };

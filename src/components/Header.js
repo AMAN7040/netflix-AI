@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faBell } from "@fortawesome/free-solid-svg-icons";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { toggleGbtSearch } from "../utils/gbtSlice";
@@ -18,7 +18,7 @@ const Header = () => {
   const user = useSelector((store) => store.user);
   const langType = useSelector((store) => store.config.lang);
   const showGbtSearch = useSelector((store) => store.gbt.showGbtSearch);
-  const route = useSelector((store)=> store.route.currentRoute);
+  const route = useSelector((store) => store.route.currentRoute);
 
   //Signout logic when user clicks on signout button
   const handleSignOut = () => {
@@ -40,7 +40,7 @@ const Header = () => {
             displayName: displayName,
           })
         );
-        navigate("/"+route);
+        navigate("/" + route);
       } else {
         dispatch(removeUser());
         navigate("/");
@@ -50,7 +50,6 @@ const Header = () => {
     //unsubscribing
     return () => unsubscribe();
   }, [route, dispatch, navigate]);
-
 
   const handleGbtToggle = () => {
     dispatch(toggleGbtSearch());
@@ -62,8 +61,14 @@ const Header = () => {
 
   const handleRoute = (e) => {
     dispatch(updateRoute(e));
-    navigate('/'+e);
-  } 
+    navigate("/" + e);
+  };
+
+  const activeStyle = ({ isActive }) => {
+    return {
+      color: isActive ? "red" : "none",
+    };
+  };
 
   return (
     <div className="absolute py-2 px-60 flex w-screen z-10">
@@ -71,13 +76,32 @@ const Header = () => {
       {user && (
         <div className="flex justify-between w-full m-5 p-1">
           <ul className="flex text-white space-x-7 font-semibold text-md mx-10 items-center w-[45%]">
-            <li onClick={() => handleRoute('browse')}  className="cursor-pointer w-20 h-8">
-              {lang[langType].home}
+            <li className="cursor-pointer w-20 h-8">
+              <NavLink
+                style={activeStyle}
+                to="/browse"
+                onClick={() => handleRoute("browse")}
+              >
+                {lang[langType].home}
+              </NavLink>
             </li>
-            <li onClick={() => handleRoute('shows')} className="cursor-pointer w-20 h-8">
-               {lang[langType].show}
-             </li>
-            <li className="cursor-pointer w-20 h-8">{lang[langType].mylist}</li>
+            <li className="cursor-pointer w-20 h-8">
+              <NavLink
+                style={activeStyle}
+                to="/shows"
+                onClick={() => handleRoute("shows")}
+              >
+                {lang[langType].show}
+              </NavLink>
+            </li>
+            <li className="cursor-pointer w-20 h-8">
+              <NavLink
+                style={activeStyle}
+                to="/mylist"
+              >
+                {lang[langType].mylist}
+              </NavLink>
+            </li>
           </ul>
           <div className="flex justify-end  h-10 items-center w-[40%] ml-[20%]">
             <select
@@ -98,7 +122,7 @@ const Header = () => {
               onClick={handleGbtToggle}
               className="w-[20%]  text-white text-lg rounded-md cursor-pointer flex  justify-center items-center border mx-2 px-3 border-white hover:bg-gray-50 hover:bg-opacity-15"
             >
-              {route=== 'browse' && showGbtSearch ? (
+              {route === "browse" && showGbtSearch ? (
                 lang[langType].home
               ) : (
                 <>
