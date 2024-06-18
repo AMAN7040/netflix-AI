@@ -5,6 +5,7 @@ import Browse from './Browse'
 import Shows from './Shows';
 import Choose from './Choose';
 import ChooseShow from './ChooseShow';
+import MyList from './MyList';
 
 
 
@@ -30,6 +31,10 @@ const Body = () => {
         {
             path: '/chooseShow/:id',
             element: <ChooseShow/>,
+        },
+        {
+            path: '/list',
+            element: <MyList/>,
         },
     ]); 
 

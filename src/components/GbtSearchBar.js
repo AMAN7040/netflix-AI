@@ -71,7 +71,7 @@ const GbtSearchBar = () => {
       );
       const data = await response.json();
       const filteredData =  data.results.slice(0, 10);
-      const suggest = filteredData.map((movie) => movie.original_title);
+      const suggest = filteredData.map((movie) => movie.title);
       dispatch(showMovieSuggestion(suggest));
       dispatch(setToggleSuggestion());
     } else {

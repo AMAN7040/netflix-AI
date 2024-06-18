@@ -47,7 +47,7 @@ const ShowList = ({ title, shows }) => {
           <Slider {...settings}>
             {shows?.map(show => (
               <div key={show.id}>
-                <ShowCard id={show.id} poster_path={show.poster_path} />
+                <ShowCard id={show.id} poster_path={show.poster_path} show={shows} />
               </div>
             ))}
           </Slider>

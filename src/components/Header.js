@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass, faBell } from "@fortawesome/free-solid-svg-icons";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
 import { toggleGbtSearch } from "../utils/gbtSlice";
@@ -15,7 +15,7 @@ import { updateRoute } from "../utils/routeSlice";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((store) => store.user);
+  const user = useSelector((store) => store.user.currentUser);
   const langType = useSelector((store) => store.config.lang);
   const showGbtSearch = useSelector((store) => store.gbt.showGbtSearch);
   const route = useSelector((store) => store.route.currentRoute);
@@ -97,7 +97,8 @@ const Header = () => {
             <li className="cursor-pointer w-20 h-8">
               <NavLink
                 style={activeStyle}
-                to="/mylist"
+                to="/list"
+                onClick={() => handleRoute("list")}
               >
                 {lang[langType].mylist}
               </NavLink>

@@ -5,7 +5,8 @@ import gbtReducer from './gbtSlice';
 import configReducer from "./configSlice";
 import tvShowsReducer from './tvShowSlice';
 import routeReducer from './routeSlice';
-import chooseReducer from './chooseSlice'
+import chooseReducer from './chooseSlice';
+import wishlistReducer from './wishListSlice';
 
 const appStore = configureStore({
     reducer: {
@@ -16,6 +17,7 @@ const appStore = configureStore({
         tvShows: tvShowsReducer,
         route: routeReducer,
         choose: chooseReducer,
+        wishlist: wishlistReducer,
     },
 });
 

@@ -4,7 +4,7 @@ import React from 'react'
   import { useDispatch } from 'react-redux';
   import { updateRoute } from "../utils/routeSlice";
 
-const ShowCard = ({id, poster_path}) => {
+const ShowCard = ({id, poster_path, }) => {
   
     const dispatch = useDispatch();
     const navigate = useNavigate();
