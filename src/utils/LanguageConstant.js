@@ -2,7 +2,6 @@ const lang = {
     en: {
         home: 'Home',
         show: 'TV Shows',       
-        latest: 'Latest',
         mylist: 'My List',
         signout: 'Sign Out',
         ai: "AI",
@@ -12,8 +11,7 @@ const lang = {
       },
       Hindi: {
         home: 'होम',
-        show: 'टीवी शो', 
-        latest: 'नवीनतम',
+        show: 'टीवी शो',        
         mylist: 'मेरी सूची',
         signout: 'साइन आउट',
         ai: "AI",
@@ -24,7 +22,6 @@ const lang = {
       Spanish: {
         home: 'Hogar',
         show: 'Programas',
-        latest: 'El último',
         mylist: 'Mi lista',
         signout: 'Desconectar',
         ai: "AI",
@@ -35,7 +32,6 @@ const lang = {
       French:{
         home: 'Maison',
         show: 'Émissions',
-       latest: 'Dernier',
         mylist: 'Ma liste',
         signout: 'déconnecter',
         ai: "AI",
@@ -46,7 +42,6 @@ const lang = {
       Japanese:{
         home: '家',
         show: 'テレビ番組',
-        latest: '最新',
         mylist: '私のリスト',
         signout: '私のリスト',
         ai: "AI",

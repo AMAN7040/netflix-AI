@@ -1,38 +1,38 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import useChoose from "../hooks/useChoose";
 import { useSelector } from "react-redux";
 import Header from "./Header";
-import useChooseVideo from "../hooks/useChooseVideo";
+import useTvshowVideo from "../hooks/useTvshowVideo";
+import useChooseShow from "../hooks/useChooseShow";
 
-const Choose = () => {
-  const { currentChoose, currentVideo } = useSelector((store) => store.choose);
+const ChooseShow = () => {
+  const { currentShow, tvshowVideo } = useSelector((store) => store.choose);
   const { id } = useParams();
-  useChoose(id);
-  useChooseVideo(id);
+  useChooseShow(id);
+  useTvshowVideo(id);
 
   return (
     <div>
-      {currentChoose && currentChoose && (
+      {currentShow && tvshowVideo && (
         <>
           <div
             className="w-full h-screen fixed bg-center bg-cover"
             style={{
-              backgroundImage: `url('https://image.tmdb.org/t/p/w500${currentChoose.poster_path}')`,
+              backgroundImage: `url('https://image.tmdb.org/t/p/w500${currentShow.poster_path}')`,
             }}
           ></div>
           <Header />
           <div className="absolute pt-[10%] w-screen bg-[rgba(0,0,0,0.7)] m-auto  p-4 text-white">
             <h1 className="text-4xl font-bold text-red-500 text-center mb-3">
-              {currentChoose.title}
+              {currentShow.name}
             </h1>
             <div className="w-full object-cover m-auto ">
-              {currentVideo ? (
+              {tvshowVideo ? (
                 <iframe
                   className="aspect-video w-full object-cover "
                   src={
                     "https://www.youtube.com/embed/" +
-                    currentVideo?.key +
+                    tvshowVideo?.key +
                     "?&autoplay=1&mute=1"
                   }
                   title="YouTube video player"
@@ -45,46 +45,38 @@ const Choose = () => {
             </div>
             <div className="w-3/4 m-auto">
               <p className="text-lg italic text-center mb-3">
-                {currentChoose.tagline}
+                {currentShow.tagline}
               </p>
-              <p className="mt-4">{currentChoose.overview}</p>
+              <p className="mt-4">{currentShow.overview}</p>
               <p className="text-md font-semibold m-2">
-                <strong>Release Date:</strong> {currentChoose.release_date}
+                <strong>Release Date:</strong> {currentShow.first_air_date}
               </p>
               <p className="text-lg font-semibold m-2">
-                <strong>Runtime:</strong> {currentChoose.runtime} minutes
+                <strong>No. of Seasons:</strong> {currentShow.number_of_seasons}
               </p>
               <p className="text-lg font-semibold m-2">
                 <strong>Genres:</strong>{" "}
-                {currentChoose.genres.map((genre) => genre.name).join(", ")}
+                {currentShow.genres.map((genre) => genre.name).join(", ")}
               </p>
               <p className="text-lg font-semibold m-2">
-                <strong>Vote Average:</strong> {currentChoose.vote_average}
+                <strong>No. of Episodes:</strong> {currentShow.number_of_episodes}
               </p>
               <p className="text-lg font-semibold m-2">
-                <strong>Vote Count:</strong> {currentChoose.vote_count}
+                <strong>Vote Count:</strong> {currentShow.vote_count}
               </p>
               <p className="text-lg font-semibold m-2">
                 <strong>Homepage:</strong>{" "}
                 <a
-                  href={currentChoose.homepage}
+                  href={currentShow.homepage}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500"
                 >
-                  {currentChoose.homepage}
+                  {currentShow.homepage}
                 </a>
               </p>
               <p>
-                <strong>IMDB ID:</strong>{" "}
-                <a
-                  href={`https://www.imdb.com/title/${currentChoose.imdb_id}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500"
-                >
-                  {currentChoose.imdb_id}
-                </a>
+                <strong>Episode runtime: </strong>{currentShow.episode_run_time}
               </p>
             </div>
           </div>
@@ -94,4 +86,4 @@ const Choose = () => {
   );
 };
 
-export default Choose;
+export default ChooseShow;

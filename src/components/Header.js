@@ -77,7 +77,6 @@ const Header = () => {
             <li onClick={() => handleRoute('shows')} className="cursor-pointer w-20 h-8">
                {lang[langType].show}
              </li>
-            <li className="cursor-pointer w-20 h-8">{lang[langType].latest}</li>
             <li className="cursor-pointer w-20 h-8">{lang[langType].mylist}</li>
           </ul>
           <div className="flex justify-end  h-10 items-center w-[40%] ml-[20%]">
