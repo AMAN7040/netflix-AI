@@ -7,14 +7,15 @@ const MyList = () => {
 
     const { items } = useSelector((store)=> store.wishlist)
     const extractedData = items.map(item => {
-        const { movie } = item;
-        return movie;
-       
-      });
-      console.log(extractedData);
+      const { movie } = item;
+      return movie;
+    });
+  
+
+      
 
   return (
-    <div className=" w-scren h-screen bg-black">
+    <div className=" w-screen h-screen bg-black">
       <Header />
       <div className="pt-[8%]">
         <MovieList title={"Your Wishlist"} movies={extractedData} />

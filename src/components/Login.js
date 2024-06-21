@@ -68,14 +68,7 @@ const Login = () => {
     handleName();
     handleEmailError();
     handlePasswordError();
-
-    // if (!isSignedIn && !nameError && !emailError && !passwordError) {
-    //   console.log("Sign up form submitted", name.current.value, email.current.value, password.current.value);
-    // } else if (isSignedIn && !emailError && !passwordError) {
-    //   console.log("Sign-in successfully", email.current.value, password.current.value);
-    // } else {
-    //   console.log('Cannot Sign in or login in');
-    // }
+    
     if (nameError || emailError || passwordError) return;
 
     if (!isSignedIn) {

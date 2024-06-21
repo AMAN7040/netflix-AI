@@ -18,7 +18,7 @@ const wishlistSlice = createSlice({
     removeFromWishlist: (state, action) => {
       const idToRemove = action.payload;
       state.items = state.items.filter(item => item.id !== idToRemove);
-      updateLocalStorage(state.items); // Update local storage
+      updateLocalStorage(state.items);
     },
   },
 });
