@@ -34,7 +34,7 @@ const MovieList = ({ title, movies }) => {
       {
         breakpoint: 1500,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -69,7 +69,7 @@ const MovieList = ({ title, movies }) => {
 
   return (
     <div className='my-1 mx-3 px-2'>
-      <h1 className='text-lg px-2 py-2 font-medium text-white 2xl:text-2xl 2xl:px-5 2xl:py-2'>{title}</h1>
+      <h1 className='text-lg px-2 py-2 font-medium text-white lg:text-xl lg:px-5 lg:py-2 2xl:text-2xl 2xl:px-5 2xl:py-2'>{title}</h1>
       {movies && movies.length > 0 ? (
         <Slider className='flex justify-start' {...settings}>
           {movies.map((movie) => (
@@ -79,7 +79,7 @@ const MovieList = ({ title, movies }) => {
           ))}
         </Slider>
       ) : (
-        <p className='text-white px-5 font-semibold 2xl:px-14'>No Movies</p>
+        <p className='text-white px-5 font-semibold lg:px-12 2xl:px-14'>No Movies</p>
       )}
     </div>
   );

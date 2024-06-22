@@ -35,7 +35,7 @@ const ShowList = ({ title, shows }) => {
       {
         breakpoint: 1500,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -69,8 +69,8 @@ const ShowList = ({ title, shows }) => {
   };
     
       return (
-        <div className='my-10 mx-5 px-5 2xl:my-1 2xl:mx-3 2xl:px-2'>
-          <h1 className='text-lg px-8 py-5 font-medium text-white 2xl:text-2xl 2xl:px-5 2xl:py-2'>{title}</h1>
+        <div className='my-10 mx-5 px-5 lg:my-1 lg:mx-5 lg:px-4 2xl:my-1 2xl:mx-3 2xl:px-2'>
+          <h1 className='text-lg px-8 py-5 font-medium text-white lg:text-xl lg:px-6 lg:py-4 2xl:text-2xl 2xl:px-5 2xl:py-2'>{title}</h1>
           <Slider {...settings}>
             {shows?.map(show => (
               <div key={show.id}>
