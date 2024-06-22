@@ -6,10 +6,10 @@ const VideoBg = ({ movieId }) => {
   useMovieTrailer(movieId);
 
   return (
-    <div className="w-screen">
+    <div className="w-screen h-screen object-cover ">
       {trailer ? (
         <iframe
-          className="aspect-video w-screen  "
+          className="aspect-video w-screen h-screen object-cover "
           src={
             "https://www.youtube.com/embed/" +
             trailer?.key +

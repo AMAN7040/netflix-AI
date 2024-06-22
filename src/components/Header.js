@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { LANGUAGES, NETFLIX_LOGO } from "../utils/constant";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass, faBell } from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -71,12 +71,12 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute py-2 px-60 flex w-screen z-10">
-      <img className="w-44" src={NETFLIX_LOGO} alt="LOGO" />
+    <div className="absolute px-15 flex w-screen z-10 bg-black md:bg-purple-500 lg:bg-blue-500 xl:bg-green-500 2xl:bg-yellow-500 2xl:py-2 2xl:px-60">
+      <img className="w-28 m-1 2xl:w-44" src={NETFLIX_LOGO} alt="LOGO" />
       {user && (
-        <div className="flex justify-between w-full m-5 p-1">
-          <ul className="flex text-white space-x-7 font-semibold text-md mx-10 items-center w-[45%]">
-            <li className="cursor-pointer w-20 h-8">
+        <div className="m-1 my-2 p-1 2xl:flex 2xl:justify-between w-full 2xl:m-5 2xl:p-1">
+          <ul className="flex text-white space-x-14 mx-1 my-2 font-semibold text-sm items-center w-full 2xl:mx-10 2xl:space-x-5 2xl:text-lg 2xl:w-[50%]">
+            <li className="cursor-pointer w-8 h-8 2xl:w-24">
               <NavLink
                 style={activeStyle}
                 to="/browse"
@@ -85,7 +85,7 @@ const Header = () => {
                 {lang[langType].home}
               </NavLink>
             </li>
-            <li className="cursor-pointer w-20 h-8">
+            <li className="cursor-pointer  w-13 h-8 2xl:w-24">
               <NavLink
                 style={activeStyle}
                 to="/shows"
@@ -94,7 +94,7 @@ const Header = () => {
                 {lang[langType].show}
               </NavLink>
             </li>
-            <li className="cursor-pointer w-20 h-8">
+            <li className="cursor-pointer w-13 h-8 2xl:w-24">
               <NavLink
                 style={activeStyle}
                 to="/list"
@@ -104,14 +104,14 @@ const Header = () => {
               </NavLink>
             </li>
           </ul>
-          <div className="flex justify-end  h-10 items-center w-[40%] ml-[20%]">
+          <div className="flex w-full mx-1 h-10 space-x-8 items-center 2xl:w-[40%] 2xl:ml-[20%] 2xl:justify-end 2xl:mx-5 ">
             <select
               onChange={handlelanguageChange}
-              className="mx-2 py-1 px-2 text-white text-md rounded-md cursor-pointer border border-white hover:bg-gray-50 hover:bg-opacity-15 bg-black bg-opacity-60 "
+              className=" text-white text-sm px-1 rounded-md cursor-pointer border border-white hover:bg-gray-50 hover:bg-opacity-15 bg-black bg-opacity-60 2xl:mx-2 2xl:py-1 2xl:px-2 2xl:text-md "
             >
               {LANGUAGES.map((language) => (
                 <option
-                  className="bg-black bg-opacity-60 w-[20%]"
+                  className="bg-black bg-opacity-60 w-[15%]"
                   value={language.identifier}
                   key={language.identifier}
                 >
@@ -121,7 +121,7 @@ const Header = () => {
             </select>
             <button
               onClick={handleGbtToggle}
-              className="w-[20%]  text-white text-lg rounded-md cursor-pointer flex  justify-center items-center border mx-2 px-3 border-white hover:bg-gray-50 hover:bg-opacity-15"
+              className="w-14 px-2 text-white text-sm rounded-md cursor-pointer flex items-center border border-white hover:bg-gray-50 hover:bg-opacity-15 2xl:text-lg 2xl:w-[20%] 2xl:justify-center 2xl:mx-2 2xl:px-3"
             >
               {route === "browse" && showGbtSearch ? (
                 lang[langType].home
@@ -130,20 +130,16 @@ const Header = () => {
                   {lang[langType].ai}
                   <FontAwesomeIcon
                     icon={faMagnifyingGlass}
-                    className="text-white cursor-pointer mx-2 text-md my-1"
+                    className="text-white cursor-pointer mx-1 text-sm 2xl:mx-2 2xl:text-md my-1"
                   />
                 </>
               )}
             </button>
-            <FontAwesomeIcon
-              icon={faBell}
-              className="text-white cursor-pointer mx-4 text-xl"
-            />
             <button
               type="submit"
               onClick={handleSignOut}
               style={{ backgroundColor: "#ff0000" }}
-              className="w-[25%] h-[80%] text-white text-md  ml-5 rounded-md cursor-pointer"
+              className="w-16 h-[80%] text-white text-sm ml-2 rounded-md cursor-pointer 2xl:w-[25%] 2xl:text-md  2xl:ml-5"
             >
               {lang[langType].signout}
             </button>

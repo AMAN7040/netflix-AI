@@ -1,12 +1,14 @@
+import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 const Footer = () => {
   return (
     <div>
-      <div className="bg-black text-white py-10 z-10 bottom-0">
+      <div className="bg-black py-4 text-white z-10 bottom-0 2xl:py-10">
         <div className="container mx-auto px-6">
-          <h6 className="mb-5">Questions? Call 000-800-919-1694</h6>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+          <h6 className="mb-3 2xl:mb-5">Questions? Call 000-800-919-1694</h6>
+          <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-5 px-1">
             <a className="footer-link" href="/">
               FAQ
             </a>
@@ -55,16 +57,16 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center">
-            <select className="footer-language" href="/">
+            <select className="footer-language text-black" href="/">
               <option value="English">English</option>
               <option value="Hindi">हिंदी</option>
             </select>
-            <i className="language-logo zmdi zmdi-globe-alt ml-2"></i>
+            <FontAwesomeIcon icon={faGlobe} className='mx-5'></FontAwesomeIcon>
           </div>
 
           <h6 className="mt-5">NetflixGBT India</h6>
           <hr className="border-white my-5" />
-          <h4 href="/" className="text-center">
+          <h4 className="text-center">
             Made by <b>Aman</b>
           </h4>
         </div>

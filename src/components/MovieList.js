@@ -14,9 +14,36 @@ const MovieList = ({ title, movies }) => {
     initialSlide: 0,
     responsive: [
       {
+        breakpoint: 1800,
+        settings: {
+          slidesToShow: 7,
+          slidesToScroll: 2,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 1700,
+        settings: {
+          slidesToShow: 6,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 1500,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 8,
+          slidesToShow: 2,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -25,7 +52,7 @@ const MovieList = ({ title, movies }) => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 7,
+          slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 2,
         },
@@ -33,7 +60,7 @@ const MovieList = ({ title, movies }) => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 5,
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
@@ -42,7 +69,7 @@ const MovieList = ({ title, movies }) => {
 
   return (
     <div className='my-1 mx-3 px-2'>
-      <h1 className='text-2xl px-5 py-2 font-medium text-white'>{title}</h1>
+      <h1 className='text-lg px-2 py-2 font-medium text-white 2xl:text-2xl 2xl:px-5 2xl:py-2'>{title}</h1>
       {movies && movies.length > 0 ? (
         <Slider className='flex justify-start' {...settings}>
           {movies.map((movie) => (
@@ -52,7 +79,7 @@ const MovieList = ({ title, movies }) => {
           ))}
         </Slider>
       ) : (
-        <p className='text-white px-6 font-semibold'>No Movies</p>
+        <p className='text-white px-5 font-semibold 2xl:px-14'>No Movies</p>
       )}
     </div>
   );

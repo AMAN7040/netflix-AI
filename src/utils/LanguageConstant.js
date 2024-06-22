@@ -7,7 +7,7 @@ const lang = {
         ai: "AI",
         search: "Search",
         clear: 'Clear',
-        gptSearchPlaceholder: "What would you like to watch today?",
+        gptSearchPlaceholder: "What would you like to watch today? Search by genre or movie name? ",
       },
       Hindi: {
         home: 'होम',

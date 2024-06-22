@@ -33,7 +33,7 @@ const MovieCard = ({ id, poster_path, movie }) => {
   return (
     <div
       onClick={() => handleRoute(`choose/${id}`)}
-      className="relative w-44 m-3 rounded-sm border border-red-700 hover:scale-105"
+      className="relative w-72 m-8 rounded-sm border border-red-700 hover:scale-105 2xl:w-44 2xl:m-5"
     >
       <Link to={`/choose/${id}`}>
         <img src={IMG_URL + poster_path} alt="MOVIE_img" />
@@ -41,14 +41,14 @@ const MovieCard = ({ id, poster_path, movie }) => {
       {isInWishlist ? (
         <button
           onClick={handleRemoveFromWishlist}
-          className="absolute right-0 z-30 -top-5 p-0 bg-red-500 text-white font-semibold text-4xl border border-solid"
+          className="absolute right-0 z-30 -top-3 p-0 bg-red-500 text-white font-semibold text-2xl border border-solid 2xl:text-4xl 2xl:-top-5"
         >
           -
         </button>
       ) : (
         <button
           onClick={handleAddToWishlist}
-          className="absolute right-0 z-30 -top-5 p-0 bg-green-500 text-white font-semibold text-4xl border border-solid"
+          className="absolute right-0 z-30 -top-3 p-0 bg-green-500 text-2xl text-white font-semibold 2xl:text-4xl border border-solid 2xl:-top-5  2xl:4xl"
         >
           +
         </button>
