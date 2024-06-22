@@ -23,12 +23,12 @@ const ChooseShow = () => {
             }}
           ></div>
           <Header />
-          <div className="absolute pt-[10%] w-screen bg-[rgba(0,0,0,0.7)] m-auto h-full p-4 text-white">
-            <h1 className="text-4xl font-bold text-red-500 text-center mb-3">
+          <div className="absolute pt-[45%] w-full bg-[rgba(0,0,0,0.7)] m-auto h-full p-1 text-white 2xl:pt-[10%] 2xl:p-5">
+            <h1 className="text-lg font-bold text-red-500 text-center mb-2 2xl:text-4xl 2xl:md-4">
               {currentShow.title}
             </h1>
-            <div className="flex w-full">
-              <div className="w-8/12 object-cover m-auto ">
+            <div className="2xl:flex w-full">
+              <div className="2xl:w-8/12 object-cover m-auto ">
                 {tvshowVideo ? (
                   <iframe
                     className="aspect-video w-full object-cover "
@@ -45,28 +45,28 @@ const ChooseShow = () => {
                   <p>Loading Clip...</p>
                 )}
               </div>
-              <div className="w-4/12 m-auto p-10 opacity-50">
-                <p className="text-lg italic text-center mb-3">
+              <div className=" m-auto p-3 opacity-50 2xl:w-4/12 2xl:p-10">
+                <p className="text-sm italic text-center mb-1 2xl:text-lg 2xl:mb-3">
                   {currentShow.tagline}
                 </p>
                 <p className="mt-4">{currentShow.overview}</p>
-                <p className="text-md font-normal m-2">
+                <p className="text-sm italic text-center mb-1 2xl:text-lg 2xl:mb-3">
                   <strong>Release Date:</strong> {currentShow.release_date}
                 </p>
-                <p className="text-md font-normal m-2">
+                <p className="text-sm italic text-center mb-1 2xl:text-lg 2xl:mb-3">
                   <strong>Runtime:</strong> {currentShow.runtime} minutes
                 </p>
-                <p className="text-md font-normal m-2">
+                <p className="text-sm italic text-center mb-1 2xl:text-lg 2xl:mb-3">
                   <strong>Genres:</strong>{" "}
                   {currentShow.genres.map((genre) => genre.name).join(", ")}
                 </p>
-                <p className="text-md font-normal m-2">
+                <p className="text-sm italic text-center mb-1 2xl:text-lg 2xl:mb-3">
                   <strong>Vote Average:</strong> {currentShow.vote_average}
                 </p>
-                <p className="text-md font-normal m-2">
+                <p className="text-sm italic text-center mb-1 2xl:text-lg 2xl:mb-3">
                   <strong>Vote Count:</strong> {currentShow.vote_count}
                 </p>
-                <p className="text-md font-normal m-2">
+                <p className="text-sm italic text-center mb-1 2xl:text-lg 2xl:mb-3">
                   <strong>Homepage:</strong>{" "}
                   <a
                     href={currentShow.homepage}

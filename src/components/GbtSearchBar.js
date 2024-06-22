@@ -88,34 +88,34 @@ const GbtSearchBar = () => {
   };
 
   return (
-    <div className="pt-[8%] flex justify-center">
+    <div className="pt-[35%] justify-center 2xl:pt-[10%] flex">
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="bg-black opacity-75 grid grid-cols-12 w-1/2 rounded-md"
+        className="bg-black opacity-75 grid grid-cols-12 w-full rounded-md 2xl:w-1/2"
       >
         <input
           type="text"
           ref={searchText}
           onChange={handleInputChange}
           placeholder={lang[langType].gptSearchPlaceholder}
-          className="col-span-8 m-5 p-3 rounded-md text-black font-medium"
+          className="col-span-9 mx-1 my-5 py-2 text-[10px] rounded-md text-black font-medium 2xl:col-span-8 2xl:m-4 2xl:text-[16px]"
         />
         <button
-          className="col-span-2 m-5 p-3 rounded-lg"
+          className="col-span-2 mx-1 my-5 rounded-lg text-xs 2xl:col-span-2 2xl:p-3 2xl:m-5 2xl:text-text-[16px]"
           onClick={handleSearchResult}
           style={{ backgroundColor: "#ff0000", color: "#ffffff" }}
         >
           {lang[langType].search}
         </button>
         <button
-          className="col-span-2 m-5 p-3 rounded-lg"
+          className="col-span-1 mx-1 my-5  text-[10px] rounded-lg 2xl:col-span-2 2xl:p-3 2xl:m-5 2xl:text-text-[16px]"
           onClick={handleClearMovie}
           style={{ backgroundColor: "#ff0000", color: "#ffffff" }}
         >
           {lang[langType].clear}
         </button>
         {showSuggestion && movieSuggestion.length > 0 && (
-          <div className="bg-black rounded-md text-white -mt-4 col-span-6 self-center mx-5 font-medium">
+          <div className="bg-black rounded-md text-white -mt-5 col-span-6 self-center mx-2 text-xs font-medium 2xl:-mt-4 2xl:mx-5 2xl:text-md">
             {movieSuggestion.map((suggestion) => (
               <p
                 key={suggestion}

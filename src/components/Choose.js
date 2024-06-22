@@ -17,18 +17,18 @@ const Choose = () => {
       {currentChoose && currentVideo && (
         <>
           <div
-            className="w-full h-screen fixed bg-center bg-cover"
+            className="w-full h-full fixed bg-center bg-cover"
             style={{
               backgroundImage: `url('https://image.tmdb.org/t/p/w500${currentChoose.poster_path}')`,
             }}
           ></div>
           <Header />
-          <div className="absolute pt-[10%] w-screen bg-[rgba(0,0,0,0.7)] m-auto h-full p-4 text-white">
-            <h1 className="text-4xl font-bold text-red-500 text-center mb-3">
+          <div className="absolute pt-[45%] w-full bg-[rgba(0,0,0,0.7)] m-auto h-full p-1 text-white 2xl:pt-[10%] 2xl:p-5 ">
+            <h1 className="text-lg font-bold text-red-500 text-center mb-2 2xl:text-4xl 2xl:md-4">
               {currentChoose.title}
             </h1>
-            <div className="flex w-full">
-              <div className="w-8/12 object-cover m-auto ">
+            <div className="2xl:flex w-full">
+              <div className="2xl:w-8/12 object-cover m-auto">
                 {currentVideo ? (
                   <iframe
                     className="aspect-video w-full object-cover "
@@ -45,28 +45,28 @@ const Choose = () => {
                   <p>Loading Clip...</p>
                 )}
               </div>
-              <div className="w-4/12 m-auto p-10 opacity-50">
-                <p className="text-lg italic text-center mb-3">
+              <div className=" m-auto p-3 opacity-50 2xl:w-4/12 2xl:p-10">
+                <p className="text-sm italic text-center mb-1 2xl:text-lg 2xl:mb-3">
                   {currentChoose.tagline}
                 </p>
                 <p className="mt-4">{currentChoose.overview}</p>
-                <p className="text-md font-normal m-2">
+                <p className="text-sm font-normal m-1 2xl:text-md 2xl:m-3">
                   <strong>Release Date:</strong> {currentChoose.release_date}
                 </p>
-                <p className="text-md font-normal m-2">
+                <p className="text-sm font-normal m-1 2xl:text-md 2xl:m-3">
                   <strong>Runtime:</strong> {currentChoose.runtime} minutes
                 </p>
-                <p className="text-md font-normal m-2">
+                <p className="text-sm font-normal m-1 2xl:text-md 2xl:m-3 ">
                   <strong>Genres:</strong>{" "}
                   {currentChoose.genres.map((genre) => genre.name).join(", ")}
                 </p>
-                <p className="text-md font-normal m-2">
+                <p className="text-sm font-normal m-1 2xl:text-md 2xl:m-3">
                   <strong>Vote Average:</strong> {currentChoose.vote_average}
                 </p>
-                <p className="text-md font-normal m-2">
+                <p className="text-sm font-normal m-1 2xl:text-md 2xl:m-3">
                   <strong>Vote Count:</strong> {currentChoose.vote_count}
                 </p>
-                <p className="text-md font-normal m-2">
+                <p className="text-sm font-normal m-1 2xl:text-md 2xl:m-3">
                   <strong>Homepage:</strong>{" "}
                   <a
                     href={currentChoose.homepage}

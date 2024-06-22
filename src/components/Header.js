@@ -71,11 +71,11 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute px-15 flex w-screen z-10 bg-black md:bg-purple-500 lg:bg-blue-500 xl:bg-green-500 2xl:bg-yellow-500 2xl:py-2 2xl:px-60">
+    <div className="absolute px-15 flex w-screen z-10   2xl:py-2 2xl:px-60">
       <img className="w-28 m-1 2xl:w-44" src={NETFLIX_LOGO} alt="LOGO" />
       {user && (
         <div className="m-1 my-2 p-1 2xl:flex 2xl:justify-between w-full 2xl:m-5 2xl:p-1">
-          <ul className="flex text-white space-x-14 mx-1 my-2 font-semibold text-sm items-center w-full 2xl:mx-10 2xl:space-x-5 2xl:text-lg 2xl:w-[50%]">
+          <ul className="flex text-white space-x-14 mx-2 my-2 font-semibold text-sm items-center w-full 2xl:mx-10 2xl:space-x-5 2xl:text-lg 2xl:w-[50%]">
             <li className="cursor-pointer w-8 h-8 2xl:w-24">
               <NavLink
                 style={activeStyle}
@@ -85,7 +85,7 @@ const Header = () => {
                 {lang[langType].home}
               </NavLink>
             </li>
-            <li className="cursor-pointer  w-13 h-8 2xl:w-24">
+            <li className="cursor-pointer w-13 h-8 2xl:w-24">
               <NavLink
                 style={activeStyle}
                 to="/shows"
