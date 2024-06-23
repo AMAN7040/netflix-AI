@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+NetflixGBT (project name)
+A React-based web application for browsing and tracking movies.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Technologies:
 
-## Available Scripts
+->React
+->React-Redux
+->Redux Toolkit
+->React Router
+->React Slick
+->Tailwind CSS
 
-In the project directory, you can run:
+Features
+-> Browse a list of movies and shows.
+-> View details of individual movies and shows.
+-> Add or remoove movies to your wishlist.
+-> Navigate between different sections (e.g., TV Shows, Movies, Recently Viewed).
+-> Recently viwed activity
+-> AI search (can search any movie using AI api by using any genre or movie name) ---- The AI search functionality allows users to search for movies using natural language queries. The AI-powered search engine can understand and respond to various search terms, including movie names, genres, actors, and more.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+                                                                                        Integration: Integrated using a third-party AI API (e.g., Google Generative AI API).
+                                                                                        Usage: Simply type your query in the search bar, and the AI will return relevant results.
+                                                                                        Example Queries: "Action movies or funny etc", "Iron Man", "Romantic comedies".
+-> autoComplete funcntionality in search bar --- The autocomplete functionality in the search bar helps users find movies faster by suggesting possible matches as they type.
+-> authentication
+-> authorization
+-> multilingual support
+   
