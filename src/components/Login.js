@@ -124,13 +124,13 @@ const Login = () => {
         <Header />
         <form
           onSubmit={handleSubmit}
-          className="absolute w-10/12 py-8 px-10 bg-black m-48 lg:m-32 lg:w-4/12 lg:mx-auto lg:py-10 lg:pr-16 lg:pl-10 2xl:m-32 2xl:mx-auto 2xl:py-10 2xl:pr-16 2xl:pl-10 right-0 mx-auto left-0 2xl:w-3/12  rounded-lg opacity-75 "
+          className="absolute w-10/12 py-8 px-10 bg-black m-48 md:m-40 md:w-5/12 md:mx-auto md:py-10 md:pr-16 md:pl-10 lg:m-32 lg:w-4/12 lg:mx-auto lg:py-10 lg:pr-16 lg:pl-10 2xl:m-32 2xl:mx-auto 2xl:py-10 2xl:pr-16 2xl:pl-10 right-0 mx-auto left-0 2xl:w-3/12  rounded-lg opacity-75 "
         >
-          <h1 className="text-xl font-bold text-white mb-4 mx-3 lg:text-2xl lg:mb-7 lg:mx-5 2xl:text-3xl 2xl:mb-7 2xl:mx-4">
+          <h1 className="text-xl font-bold text-white mb-4 mx-3 md:text-xl md:mb-6 md:mx-3 lg:text-2xl lg:mb-7 lg:mx-5 2xl:text-3xl 2xl:mb-7 2xl:mx-4">
             {isSignedIn ? "Sign-in" : "Signup"}
           </h1>
           {authError && (
-            <p style={{ color: "#ffff00" }} className="text-sm px-2 mb-2 lg:px-4 lg:mb-4 lg:text-md 2xl:px-4 2xl:mb-4 2xl:text-md">
+            <p style={{ color: "#ffff00" }} className="text-sm px-2 mb-2 md:px-2 md:mb-3 md:text-sm lg:px-4 lg:mb-4 lg:text-md 2xl:px-4 2xl:mb-4 2xl:text-md">
               {authError}
             </p>
           )}
@@ -142,7 +142,7 @@ const Login = () => {
                 ref={name}
                 placeholder="Enter your Name"
                 onBlur={handleName}
-                className={`bg-black w-full py-1 px-2 mb-4 border rounded-md opacity-90 text-white lg:py-3 lg:px-3 lg:mx-4 lg:mb-3  2xl:py-3 2xl:px-3 2xl:mx-4 2xl:mb-3  ${
+                className={`bg-black w-full py-1 px-2 mb-4 border rounded-md opacity-90 text-white md:py-1 md:px-2 md:mx-2 md:mb-2 lg:py-3 lg:px-3 lg:mx-4 lg:mb-3  2xl:py-3 2xl:px-3 2xl:mx-4 2xl:mb-3  ${
                   nameError ? "border-red-500" : "border-gray-300"
                 }`}
                 style={
@@ -153,7 +153,7 @@ const Login = () => {
                 required
               />
               {nameError && (
-                <p style={{ color: "#ff0000" }} className="px-1 mb-1 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2">
+                <p style={{ color: "#ff0000" }} className="px-1 mb-1 md:px-2 md:mb-2 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2">
                   {nameError}
                 </p>
               )}
@@ -165,7 +165,7 @@ const Login = () => {
             id="email"
             placeholder="Enter your Email"
             onBlur={handleEmailError}
-            className={`bg-black w-full py-1 px-1  mb-4 border rounded-md opacity-90 text-white lg:py-3 lg:px-3 lg:mx-4 lg:mb-3 2xl:py-3 2xl:px-3 2xl:mx-4 2xl:mb-3 ${
+            className={`bg-black w-full py-1 px-2 mb-4 border rounded-md opacity-90 text-white md:py-1 md:px-2 md:mx-2 md:mb-2 lg:py-3 lg:px-3 lg:mx-4 lg:mb-3  2xl:py-3 2xl:px-3 2xl:mx-4 2xl:mb-3  ${
               emailError ? "border-red-500" : "border-gray-300"
             }`}
             style={
@@ -174,7 +174,7 @@ const Login = () => {
             required
           />
           {emailError && (
-            <p style={{ color: "#ff0000" }} className="px-1 mb-1 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2">
+            <p style={{ color: "#ff0000" }} className="px-1 mb-1 md:px-2 md:mb-2 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2">
               {emailError}
             </p>
           )}
@@ -184,7 +184,7 @@ const Login = () => {
             id="password"
             placeholder="Enter your password"
             onBlur={handlePasswordError}
-            className={`bg-black w-full py-1 px-1  mb-4 border rounded-md opacity-90 text-white lg:py-3 lg:px-3 lg:mx-4 lg:mb-3 2xl:py-3 2xl:px-3 2xl:mx-4 2xl:mb-3 `}
+            className={`bg-black w-full py-1 px-2 mb-4 border rounded-md opacity-90 text-white md:py-1 md:px-2 md:mx-2 md:mb-2 lg:py-3 lg:px-3 lg:mx-4 lg:mb-3  2xl:py-3 2xl:px-3 2xl:mx-4 2xl:mb-3 `}
             style={
               passwordError
                 ? { borderColor: "#ff0000" }
@@ -193,7 +193,7 @@ const Login = () => {
             required
           />
           {passwordError && (
-            <p style={{ color: "#ff0000" }} className="px-1 mb-1 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2">
+            <p style={{ color: "#ff0000" }} className="px-1 mb-1 md:px-2 md:mb-2 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2">
               {passwordError}
             </p>
           )}
@@ -201,28 +201,28 @@ const Login = () => {
             type="submit"
             onClick={handleButton}
             style={{ backgroundColor: "#ff0000" }}
-            className="w-full text-white py-1 px-1 mb-4 rounded-md cursor-pointer lg:py-2 lg:px-3 lg:mb-5 lg:mx-4 2xl:py-2 2xl:px-3 2xl:mb-5 2xl:mx-4"
+            className="w-full text-white py-1 px-1 mb-4 rounded-md cursor-pointer md:py-2 md:px-2 md:mb-3 md:mx-2 lg:py-2 lg:px-3 lg:mb-5 lg:mx-4 2xl:py-2 2xl:px-3 2xl:mb-5 2xl:mx-4"
           >
             {isSignedIn ? "Sign-in" : "Signup"}
           </button>
           <input
             type="checkbox"
             id="remember-me"
-            className="py-1 mb-3 px-1 bg-black text-white mx-1 border-1 border-gray-200 hover:border-white lg:py-3 lg:mb-3 lg:px-5 lg:mx-4  2xl:py-3 2xl:mb-3 2xl:px-5 2xl:mx-4 "
+            className="py-1 mb-3 px-1 bg-black text-white mx-1 border-1 border-gray-200 hover:border-white  md:py-2 md:mb-3 md:px-2 md:mx-2 lg:py-3 lg:mb-3 lg:px-5 lg:mx-4  2xl:py-3 2xl:mb-3 2xl:px-5 2xl:mx-4 "
           />
           <label htmlFor="remember-me" className="text-white px-1">
             Remember me
           </label>
-          <p className="text-gray-400 px-1 py-1 mb-1 lg:px-5 lg:py-3 lg:mb-2 2xl:px-5 2xl:py-3 2xl:mb-2 ">
+          <p className="text-gray-400 px-1 py-1 mb-1 md:py-2 md:mb-3 md:px-2 lg:px-5 lg:py-3 lg:mb-2 2xl:px-5 2xl:py-3 2xl:mb-2 ">
             {isSignedIn ? "New to Netflix?" : "Already Registered?"}
             <span
-              className="text-white mx-1 cursor-pointer hover:underline lg:mx-5 2xl:mx-5"
+              className="text-white mx-1 cursor-pointer hover:underline md:px-1 lg:mx-5 2xl:mx-5"
               onClick={toggleForm}
             >
               {isSignedIn ? "Sign up now" : "Sign-in now"}
             </span>{" "}
           </p>
-          <p className="text-gray-400 px-2 py-1 mb-2 text-[11px] lg:px-5 lg:py-3 ;g:mb-3 lg:text-xs 2xl:px-5 2xl:py-3 2xl:mb-3 2xl:text-xs">
+          <p className="text-gray-400 px-2 py-1 mb-2 text-[11px] md:py-2 md:mb-3 md:px-2 md:text-xs lg:px-5 lg:py-3 lg:mb-3 lg:text-xs 2xl:px-5 2xl:py-3 2xl:mb-3 2xl:text-xs">
             This page is protected by Google reCAPTCHA to ensure you're not a
             bot.
             <span
@@ -233,7 +233,7 @@ const Login = () => {
             </span>
           </p>
           {more && (
-            <p className="text-gray-400 px-2 py-1 mb-2 text-[11px] lg:px-5 lg:py-3 ;g:mb-3 lg:text-xs 2xl:px-5 2xl:py-3 2xl:mb-3 2xl:text-xs">
+            <p className="text-gray-400 px-2 py-1 mb-2 text-[11px]  md:py-2 md:mb-3 md:px-2 md:text-xs lg:px-5 lg:py-3 ;g:mb-3 lg:text-xs 2xl:px-5 2xl:py-3 2xl:mb-3 2xl:text-xs">
               The information collected by Google reCAPTCHA is subject to the
               Google Privacy Policy and Terms of Service, and is used for
               providing, maintaining, and improving the reCAPTCHA service and

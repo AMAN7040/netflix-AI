@@ -23,9 +23,9 @@ const ChooseShow = () => {
             }}
           ></div>
           <Header />
-          <div className="absolute pt-[45%] w-full bg-[rgba(0,0,0,0.7)] m-auto h-full p-1 text-white lg:pt-[15%] lg:p-5 2xl:pt-[10%] 2xl:p-5">
-            <h1 className="text-lg font-bold text-red-500 text-center mb-2 lg:text-2xl lg:mb-4 2xl:text-4xl 2xl:mb-4">
-              {currentShow.title}
+          <div className="absolute pt-[45%] w-full bg-[rgba(0,0,0,0.7)] m-auto h-full p-1 text-white md:pt-[20%] md:p-3 lg:pt-[15%] lg:p-5 2xl:pt-[10%] 2xl:p-5">
+            <h1 className="text-lg font-bold text-red-500 text-center mx-auto mb-2 lg:text-2xl lg:mb-4 2xl:text-4xl 2xl:mb-4">
+              {currentShow.original_name}
             </h1>
             <div className="lg:flex 2xl:flex w-full">
               <div className="lg:w-8/12 2xl:w-8/12 object-cover m-auto ">
@@ -46,7 +46,7 @@ const ChooseShow = () => {
                 )}
               </div>
               <div className=" m-auto p-3 opacity-50 lg:w-4/12 lg:p-8 2xl:w-4/12 2xl:p-10">
-                <p className="text-sm italic text-center mb-1 lg:text-md lg:mb-3 2xl:text-lg 2xl:mb-3">
+                <p className="text-sm italic text-center mb-1 md:text-sm lg:text-md lg:mb-3 2xl:text-lg 2xl:mb-3">
                   {currentShow.tagline}
                 </p>
                 <p className="mt-4">{currentShow.overview}</p>

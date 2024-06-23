@@ -88,34 +88,34 @@ const GbtSearchBar = () => {
   };
 
   return (
-    <div className="pt-[35%] justify-center lg:pt-[12%] 2xl:pt-[10%] flex">
+    <div className="pt-[35%] justify-center md:pt-[13%] lg:pt-[12%] 2xl:pt-[10%] flex">
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="bg-black opacity-75 grid grid-cols-12 w-full rounded-md lg:w-1/2 2xl:w-1/2"
+        className="bg-black opacity-75 grid grid-cols-12 w-full rounded-md md:w-9/12 lg:w-1/2 2xl:w-1/2"
       >
         <input
           type="text"
           ref={searchText}
           onChange={handleInputChange}
           placeholder={lang[langType].gptSearchPlaceholder}
-          className="col-span-9 mx-1 my-5 py-2 text-[10px] rounded-md text-black font-medium lg:col-span-8 lg:m-5 lg:text-[13px] 2xl:col-span-8 2xl:m-4 2xl:text-[16px]"
+          className="col-span-9 mx-1 my-5 py-2 text-[10px] rounded-md text-black font-medium md:col-span-8 md:m-5 md:text-[11px] lg:col-span-8 lg:m-5 lg:text-[13px] 2xl:col-span-8 2xl:m-4 2xl:text-[16px]"
         />
         <button
-          className="col-span-2 mx-1 my-5 rounded-lg text-xs lg:col-span-2 lg:m-5 lg:text-[15px] 2xl:col-span-2 2xl:p-3 2xl:m-5 2xl:text-text-[16px]"
+          className="col-span-2 mx-1 my-5 rounded-lg text-xs md:col-span-2 md:m-5 md:text-[11px] lg:col-span-2 lg:m-5 lg:text-[15px] 2xl:col-span-2 2xl:p-3 2xl:m-5 2xl:text-text-[16px]"
           onClick={handleSearchResult}
           style={{ backgroundColor: "#ff0000", color: "#ffffff" }}
         >
           {lang[langType].search}
         </button>
         <button
-          className="col-span-1 mx-1 my-5  text-[10px] rounded-lg lg:col-span-2 lg:m-5 lg:text-[15px] 2xl:col-span-2 2xl:p-3 2xl:m-5 2xl:text-text-[16px]"
+          className="col-span-1 mx-1 my-5  text-[10px] rounded-lg md:col-span-2 md:m-5 md:text-[11px] lg:col-span-2 lg:m-5 lg:text-[15px] 2xl:col-span-2 2xl:p-3 2xl:m-5 2xl:text-text-[16px]"
           onClick={handleClearMovie}
           style={{ backgroundColor: "#ff0000", color: "#ffffff" }}
         >
           {lang[langType].clear}
         </button>
         {showSuggestion && movieSuggestion.length > 0 && (
-          <div className="bg-black rounded-md text-white -mt-5 col-span-6 self-center mx-2 text-xs font-medium lg:-mt-3 lg:mx-5 lg-text-md 2xl:-mt-4 2xl:mx-5 2xl:text-md">
+          <div className="bg-black rounded-md text-white -mt-5 col-span-6 self-center mx-2 text-xs font-medium md:-mt-2 md:mx-5 md:text-xs lg:-mt-3 lg:mx-5 lg:text-sm 2xl:-mt-4 2xl:mx-5 2xl:text-md">
             {movieSuggestion.map((suggestion) => (
               <p
                 key={suggestion}

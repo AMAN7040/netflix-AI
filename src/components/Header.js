@@ -71,12 +71,12 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute px-15 flex w-screen z-10 lg:py-2 lg:px-48  2xl:py-2 2xl:px-60">
-      <img className="w-28 m-1 lg:w-36 2xl:w-44" src={NETFLIX_LOGO} alt="LOGO" />
+    <div className="absolute px-15 flex w-screen z-10 md:py-2 md:px-25 lg:py-2 lg:px-48  2xl:py-2 2xl:px-60">
+      <img className="w-28 m-1 md:w-32 lg:w-36 2xl:w-44" src={NETFLIX_LOGO} alt="LOGO" />
       {user && (
-        <div className="m-1 my-2 p-1 lg:flex lg:justify-between lg:m-3 lg:p-1 2xl:flex 2xl:justify-between w-full 2xl:m-5 2xl:p-1">
-          <ul className="flex text-white space-x-14 mx-2 my-2 font-semibold text-sm items-center w-full lg:mx-6 lg:text-lg lg:w-[50%] lg:space-x-10 2xl:mx-10 2xl:space-x-5 2xl:text-lg 2xl:w-[50%]">
-            <li className="cursor-pointer w-8 h-8 lg:w-24  2xl:w-24">
+        <div className="m-1 my-2 p-1 md:flex md:m-3 md:p-1 lg:flex lg:justify-between lg:m-3 lg:p-1 2xl:flex 2xl:justify-between w-full 2xl:m-5 2xl:p-1">
+          <ul className="flex text-white space-x-14 mx-2 my-2 font-semibold text-sm items-center w-full md:mx-4 md:text-md md:w-full md:space-x-16 lg:mx-6 lg:text-lg lg:w-[50%] lg:space-x-10 2xl:mx-10 2xl:space-x-5 2xl:text-lg 2xl:w-[50%]">
+            <li className="cursor-pointer w-8 h-8 md:w-16 lg:w-24  2xl:w-24">
               <NavLink
                 style={activeStyle}
                 to="/browse"
@@ -85,7 +85,7 @@ const Header = () => {
                 {lang[langType].home}
               </NavLink>
             </li>
-            <li className="cursor-pointer w-13 h-8 lg:w-24 2xl:w-24">
+            <li className="cursor-pointer w-8 h-8 md:w-20 lg:w-24  2xl:w-24">
               <NavLink
                 style={activeStyle}
                 to="/shows"
@@ -94,7 +94,7 @@ const Header = () => {
                 {lang[langType].show}
               </NavLink>
             </li>
-            <li className="cursor-pointer w-13 h-8 lg:w-24 2xl:w-24">
+            <li className="cursor-pointer w-8 h-8 md:w-20 lg:w-24  2xl:w-24">
               <NavLink
                 style={activeStyle}
                 to="/list"
@@ -104,7 +104,7 @@ const Header = () => {
               </NavLink>
             </li>
           </ul>
-          <div className="flex w-full mx-1 h-10 space-x-8 items-center lg:w-[40%] lg:ml-[20%] lg:justify-end lg:mx-5 2xl:w-[40%] 2xl:ml-[20%] 2xl:justify-end 2xl:mx-5 ">
+          <div className="flex w-full mx-1 h-10 space-x-8 items-center md:ml-[15%] lg:w-[40%] lg:ml-[20%] lg:justify-end lg:mx-5 2xl:w-[40%] 2xl:ml-[20%] 2xl:justify-end 2xl:mx-5 ">
             <select
               onChange={handlelanguageChange}
               className=" text-white text-sm px-1 rounded-md cursor-pointer border border-white hover:bg-gray-50 hover:bg-opacity-15 bg-black bg-opacity-60 lg:mx-2 lg:py-1 lg:px-2 lg:text-md 2xl:mx-2 2xl:py-1 2xl:px-2 2xl:text-md "
