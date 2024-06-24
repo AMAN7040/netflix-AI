@@ -12,7 +12,7 @@ Technologies:
 
 Features
 
--> Browse a list of movies and shows.
+-> Browse a list of movies and shows.                           
 -> View details of individual movies and shows.
 -> Add or remoove movies to your wishlist.
 -> Navigate between different sections (e.g., TV Shows, Movies, Recently Viewed).
