@@ -21,7 +21,7 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
-  
+
   const dispatch = useDispatch();
 
   const toggleForm = () => {
@@ -68,7 +68,7 @@ const Login = () => {
     handleName();
     handleEmailError();
     handlePasswordError();
-    
+
     if (nameError || emailError || passwordError) return;
 
     if (!isSignedIn) {
@@ -108,8 +108,7 @@ const Login = () => {
         email.current.value,
         password.current.value
       )
-        .then((userCredential) => {
-        })
+        .then((userCredential) => {})
         .catch((error) => {
           setAuthError(
             `Incorrect password for ${email.current.value} Or User doesn't exist. You can reset your password or try again.`
@@ -119,7 +118,10 @@ const Login = () => {
   };
 
   return (
-    <section className=" w-full h-screen bg-center bg-cover" style={{ backgroundImage: `url('${BACKGROUND_IMAGE_URL}')` }}>
+    <section
+      className=" w-full h-screen bg-center bg-cover"
+      style={{ backgroundImage: `url('${BACKGROUND_IMAGE_URL}')` }}
+    >
       <div className="w-full h-full bg-[rgba(0,0,0,0.5)]">
         <Header />
         <form
@@ -130,7 +132,10 @@ const Login = () => {
             {isSignedIn ? "Sign-in" : "Signup"}
           </h1>
           {authError && (
-            <p style={{ color: "#ffff00" }} className="text-sm px-2 mb-2 md:px-2 md:mb-3 md:text-sm lg:px-4 lg:mb-4 lg:text-md 2xl:px-4 2xl:mb-4 2xl:text-md">
+            <p
+              style={{ color: "#ffff00" }}
+              className="text-sm px-2 mb-2 md:px-2 md:mb-3 md:text-sm lg:px-4 lg:mb-4 lg:text-md 2xl:px-4 2xl:mb-4 2xl:text-md"
+            >
               {authError}
             </p>
           )}
@@ -153,7 +158,10 @@ const Login = () => {
                 required
               />
               {nameError && (
-                <p style={{ color: "#ff0000" }} className="px-1 mb-1 md:px-2 md:mb-2 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2">
+                <p
+                  style={{ color: "#ff0000" }}
+                  className="px-1 mb-1 md:px-2 md:mb-2 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2"
+                >
                   {nameError}
                 </p>
               )}
@@ -174,7 +182,10 @@ const Login = () => {
             required
           />
           {emailError && (
-            <p style={{ color: "#ff0000" }} className="px-1 mb-1 md:px-2 md:mb-2 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2">
+            <p
+              style={{ color: "#ff0000" }}
+              className="px-1 mb-1 md:px-2 md:mb-2 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2"
+            >
               {emailError}
             </p>
           )}
@@ -193,7 +204,10 @@ const Login = () => {
             required
           />
           {passwordError && (
-            <p style={{ color: "#ff0000" }} className="px-1 mb-1 md:px-2 md:mb-2 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2">
+            <p
+              style={{ color: "#ff0000" }}
+              className="px-1 mb-1 md:px-2 md:mb-2 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2"
+            >
               {passwordError}
             </p>
           )}
@@ -205,14 +219,7 @@ const Login = () => {
           >
             {isSignedIn ? "Sign-in" : "Signup"}
           </button>
-          <input
-            type="checkbox"
-            id="remember-me"
-            className="py-1 mb-3 px-1 bg-black text-white mx-1 border-1 border-gray-200 hover:border-white  md:py-2 md:mb-3 md:px-2 md:mx-2 lg:py-3 lg:mb-3 lg:px-5 lg:mx-4  2xl:py-3 2xl:mb-3 2xl:px-5 2xl:mx-4 "
-          />
-          <label htmlFor="remember-me" className="text-white px-1">
-            Remember me
-          </label>
+
           <p className="text-gray-400 px-1 py-1 mb-1 md:py-2 md:mb-3 md:px-2 lg:px-5 lg:py-3 lg:mb-2 2xl:px-5 2xl:py-3 2xl:mb-2 ">
             {isSignedIn ? "New to Netflix?" : "Already Registered?"}
             <span

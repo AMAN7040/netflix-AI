@@ -78,12 +78,12 @@ const Choose = () => {
                   </a>
                 </p>
                 <p>
-                  <strong>IMDB ID:</strong>{" "}
+                  <strong className="m-3">IMDB ID:</strong>{" "}
                   <a
                     href={`https://www.imdb.com/title/${currentChoose.imdb_id}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-500"
+                    className="text-blue-500 m-1"
                   >
                     {currentChoose.imdb_id}
                   </a>
