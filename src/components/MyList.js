@@ -20,6 +20,7 @@ const MyList = () => {
       <div className="pt-[39%] md:pt-[14%] lg:pt-[23%] 2xl:pt-[12%]">
         <MovieList title={"Your Wishlist"} movies={extractedData} />
       </div>
+      
     </div>
   );
 };

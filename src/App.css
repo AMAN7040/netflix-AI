@@ -1,3 +1,11 @@
+body {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  touch-action: manipulation; /* Prevent double tap to zoom */
+  -ms-touch-action: manipulation; /* For IE 10 and 11 */
+  user-scalable: no; /* Prevent user zooming */
+}
+
+
 ::-webkit-scrollbar {
     width: 7px; /* Set the width of the scrollbar */
     height: 10px;

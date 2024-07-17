@@ -19,16 +19,16 @@ const Browse = () => {
   const gbtSearch = useSelector((store) => store.gbt.showGbtSearch);
 
   return (
-    <div>
+    <div className=''>
       <Header />
       {gbtSearch ? (
         <GbtSearch />
       ) : (
-        <>
+        <div className="">
           <FirstContainer />
           <SecondaryContainer />
           <Footer/>
-        </>
+        </div>
       )}
      
     </div>

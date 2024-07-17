@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Header from "./Header";
 import useChooseVideo from "../hooks/useChooseVideo";
 import Footer from "./Footer";
+import ReactPlayer from "react-player";
 
 const Choose = () => {
   const { currentChoose, currentVideo } = useSelector((store) => store.choose);
@@ -30,22 +31,20 @@ const Choose = () => {
             <div className="lg:flex 2xl:flex w-full">
               <div className="lg:w-8/12 2xl:w-8/12 object-cover m-auto">
                 {currentVideo ? (
-                  <iframe
-                    className="aspect-video w-full object-cover "
-                    src={
-                      "https://www.youtube.com/embed/" +
-                      currentVideo?.key +
-                      "?&autoplay=1&mute=1"
-                    }
-                    title="YouTube video player"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    // referrerPolicy="strict-origin-when-cross-origin"
-                  ></iframe>
+                  <ReactPlayer
+                    className="aspect-video w-full object-cover"
+                    url={`https://www.youtube.com/watch?v=${currentVideo?.key}`}
+                    controls
+                    width="100%"
+                    height="100%"
+                    playing
+                    muted
+                  />
                 ) : (
                   <p>Loading Clip...</p>
                 )}
               </div>
-              <div className=" m-auto p-3 opacity-50 md:p-4 lg:w-4/12 lg:p-8 2xl:w-4/12 2xl:p-10">
+              <div className="m-auto p-3 opacity-50 md:p-4 lg:w-4/12 lg:p-8 2xl:w-4/12 2xl:p-10">
                 <p className="text-sm italic text-center mb-1 md:text-sm lg:text-md lg:mb-3 2xl:text-lg 2xl:mb-3">
                   {currentChoose.tagline}
                 </p>

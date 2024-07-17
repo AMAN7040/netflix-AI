@@ -33,7 +33,7 @@ const MovieCard = ({ id, poster_path, movie }) => {
   return (
     <div
       onClick={() => handleRoute(`choose/${id}`)}
-      className="relative w-72 m-8 rounded-sm border border-red-700 hover:scale-105 md:w-56 md:m-6 lg:w-62 lg:m-4 2xl:w-44 2xl:m-5"
+      className="relative w-72 m-5 rounded-sm border border-red-700 hover:scale-105 md:w-56 md:m-6 lg:w-62 lg:m-4 2xl:w-44 2xl:m-5"
     >
       <Link to={`/choose/${id}`}>
         <img src={IMG_URL + poster_path} alt="MOVIE_img" />
