@@ -1,48 +1,65 @@
-import React from 'react'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import Login from './Login'
-import Browse from './Browse'
-import Shows from './Shows';
-import Choose from './Choose';
-import ChooseShow from './ChooseShow';
-import MyList from './MyList';
-
-
+import React, { Suspense, lazy } from "react";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Login from "./Login";
+const Browse = lazy(() => import("./Browse"));
+const Shows = lazy(() => import("./Shows"));
+const Choose = lazy(() => import("./Choose"));
+const ChooseShow = lazy(() => import("./ChooseShow"));
+const MyList = lazy(() => import("./MyList"));
 
 const Body = () => {
-   
-    const appRouter = createBrowserRouter([
-        {
-            path: '/',
-            element: <Login/>,
-        },
-        {
-            path: '/browse',
-            element: <Browse/>,
-        },
-        {
-            path: '/shows',
-            element: <Shows/>,
-        },
-        {
-            path: '/choose/:id',
-            element: <Choose/>,
-        },
-        {
-            path: '/chooseShow/:id',
-            element: <ChooseShow/>,
-        },
-        {
-            path: '/list',
-            element: <MyList/>,
-        },
-    ]); 
+  const appRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <Login />,
+    },
+    {
+      path: "/browse",
+      element: (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Browse />
+        </Suspense>
+      ),
+    },
+    {
+      path: "/shows",
+      element: (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Shows />
+        </Suspense>
+      ),
+    },
+    {
+      path: "/choose/:id",
+      element: (
+        <Suspense fallback={<div>Loading...</div>}>
+          <Choose />
+        </Suspense>
+      ),
+    },
+    {
+      path: "/chooseShow/:id",
+      element: (
+        <Suspense fallback={<div>Loading...</div>}>
+          <ChooseShow />
+        </Suspense>
+      ),
+    },
+    {
+      path: "/list",
+      element: (
+        <Suspense fallback={<div>Loading...</div>}>
+          <MyList />
+        </Suspense>
+      ),
+    },
+  ]);
 
   return (
-    <div className=''>
-        <RouterProvider router={appRouter}/>
+    <div>
+      <RouterProvider router={appRouter} />
     </div>
   );
 };
 
-export default Body
+export default Body;

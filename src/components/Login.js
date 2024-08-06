@@ -10,14 +10,17 @@ import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { BACKGROUND_IMAGE_URL } from "../utils/constant";
+import { debounce } from 'lodash';
 
 const Login = () => {
   const [more, setMore] = useState(false);
   const [isSignedIn, setSignedIn] = useState(true);
-  const [emailError, setemailError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [authError, setAuthError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [nameError, setNameError] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
@@ -32,16 +35,16 @@ const Login = () => {
     setMore(true);
   };
 
-  const handleEmailError = () => {
+  const handleEmailError = debounce(() => {
     const emailValue = email.current ? email.current.value : "";
     if (!validateEmail(emailValue)) {
-      setemailError("Please enter a valid Email");
+      setEmailError("Please enter a valid Email");
     } else {
-      setemailError("");
+      setEmailError("");
     }
-  };
+  }, 300);
 
-  const handlePasswordError = () => {
+  const handlePasswordError = debounce(() => {
     const passwordValue = password.current ? password.current.value : "";
     if (!validatePassword(passwordValue)) {
       setPasswordError(
@@ -50,70 +53,58 @@ const Login = () => {
     } else {
       setPasswordError("");
     }
-  };
+  }, 300);
 
-  const handleName = () => {
+  const handleName = debounce(() => {
     const nameValue = name.current ? name.current.value : "";
     if (nameValue.trim() === "") {
       setNameError("Please enter your name");
     } else {
       setNameError("");
     }
-  };
+  }, 300);
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
-  const handleButton = () => {
+  const handleButton = async () => {
     handleName();
     handleEmailError();
     handlePasswordError();
 
     if (nameError || emailError || passwordError) return;
 
-    if (!isSignedIn) {
-      //Signup logic
-      createUserWithEmailAndPassword(
-        auth,
-        email.current.value,
-        password.current.value
-      )
-        .then((userCredential) => {
-          //signed up
-          const user = userCredential.user;
-          updateProfile(user, {
-            displayName: name.current.value,
-          })
-            .then(() => {
-              const { uid, email, displayName } = auth.currentUser;
-              dispatch(
-                addUser({
-                  uid: uid,
-                  email: email,
-                  displayName: displayName,
-                })
-              );
-            })
-            .catch((error) => {
-              setAuthError(error.message);
-            });
-        })
-        .catch((error) => {
-          setAuthError("Sorry failed to create a account. Please try again");
-        });
-    } else {
-      //sign in logic
-      signInWithEmailAndPassword(
-        auth,
-        email.current.value,
-        password.current.value
-      )
-        .then((userCredential) => {})
-        .catch((error) => {
-          setAuthError(
-            `Incorrect password for ${email.current.value} Or User doesn't exist. You can reset your password or try again.`
-          );
-        });
+    setLoading(true);
+
+    try {
+      if (!isSignedIn) {
+        // Signup logic
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email.current.value,
+          password.current.value
+        );
+        const user = userCredential.user;
+        await updateProfile(user, { displayName: name.current.value });
+        const { uid, email, displayName } = auth.currentUser;
+        dispatch(addUser({ uid, email, displayName }));
+      } else {
+        // Sign in logic
+        await signInWithEmailAndPassword(
+          auth,
+          email.current.value,
+          password.current.value
+        );
+      }
+    } catch (error) {
+      setAuthError(
+        isSignedIn
+          ? `Incorrect password for ${email.current.value} Or User doesn't exist. You can reset your password or try again.`
+          : "Sorry failed to create an account. Please try again"
+      );
+    } finally {
+      setLoading(false);
     }
   };
 

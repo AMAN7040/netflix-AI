@@ -11,27 +11,28 @@ import GbtSearch from "./GbtSearch";
 import Footer from "./Footer";
 
 const Browse = () => {
+  // Custom hooks for fetching movie data
   useNowPlayingMovies();
   usePopularMovies();
   useTopRatedMovies();
   useUpComingMovies();
 
+  // Selector for showing the GBT search component
   const gbtSearch = useSelector((store) => store.gbt.showGbtSearch);
 
   return (
-    <div className=''>
+    <>
       <Header />
       {gbtSearch ? (
         <GbtSearch />
       ) : (
-        <div className="">
+        <>
           <FirstContainer />
           <SecondaryContainer />
-          <Footer/>
-        </div>
+          <Footer />
+        </>
       )}
-     
-    </div>
+    </>
   );
 };
 

@@ -10,7 +10,6 @@ const VideoBg = ({ movieId }) => {
     <div className="w-screen h-screen object-cover bg-black">
       {trailer ? (
         <ReactPlayer
-        className=""
         url={`https://www.youtube.com/watch?v=${trailer?.key}`}
         controls
         width="100%"
@@ -19,7 +18,9 @@ const VideoBg = ({ movieId }) => {
         muted
       />
       ) : (
+        <div className="flex justify-center items-center h-full text-white text-lg">
         <p>Loading trailer...</p>
+      </div>
       )}
     </div>
   );

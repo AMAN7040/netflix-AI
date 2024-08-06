@@ -3,24 +3,31 @@ import { addShow } from "../utils/tvShowSlice";
 import { API_OPTIONS } from "../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
 
-
 const useTvShows = () => {
-    const allShow = useSelector((store)=> store.tvShows.allShow);
-    //fetch the data from tmdb and update the redux store
-   const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const allShow = useSelector((store) => store.tvShows.allShow);
 
-   const getAllShows = async () => {
-    const response = await fetch(
-      "https://api.themoviedb.org/3/trending/tv/day?language=en-US",
-      API_OPTIONS
-    );
-    const data = await response.json();
-    dispatch(addShow(data.results));
+  const getAllShows = async () => {
+    try {
+      const response = await fetch(
+        "https://api.themoviedb.org/3/trending/tv/day?language=en-US",
+        API_OPTIONS
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      dispatch(addShow(data.results));
+    } catch (error) {
+      console.error("Error fetching TV shows:", error);
+    }
   };
 
   useEffect(() => {
-    !allShow && getAllShows();
-  }, []);
-}
+    if (!allShow || allShow.length === 0) {
+      getAllShows();
+    }
+  }, [allShow, dispatch]);
+};
 
 export default useTvShows;

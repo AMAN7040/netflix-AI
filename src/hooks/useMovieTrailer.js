@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constant";
 import { useDispatch, useSelector } from "react-redux";
-import { addMovieTrailer } from "../utils/moviesSlice";
+import { addMovieTrailer, clearMovieTrailer } from "../utils/moviesSlice";
 
 const useMovieTrailer = (movieId) => {
     const dispatch = useDispatch();
@@ -35,7 +35,8 @@ const useMovieTrailer = (movieId) => {
       };
     
     useEffect(() => {
-      if(!movieTrailer){
+      if (!movieTrailer || movieTrailer.id !== movieId){
+        dispatch(clearMovieTrailer());
         getVideo();
       }
         

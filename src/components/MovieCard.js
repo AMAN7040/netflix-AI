@@ -13,9 +13,9 @@ const MovieCard = ({ id, poster_path, movie }) => {
     state.wishlist.items.some((item) => item.id === id)
   );
 
-  const handleRoute = (e) => {
-    dispatch(updateRoute(e));
-    navigate("/" + e);
+  const handleRoute = () => {
+    dispatch(updateRoute(`choose/${id}`));
+    navigate(`/choose/${id}`);
     dispatch(addToRecentlyViewed(movie));
   };
 
@@ -30,29 +30,23 @@ const MovieCard = ({ id, poster_path, movie }) => {
   };
 
   if (!poster_path) return null;
+
   return (
     <div
-      onClick={() => handleRoute(`choose/${id}`)}
       className="relative w-72 m-5 rounded-sm border border-red-700 hover:scale-105 md:w-56 md:m-6 lg:w-62 lg:m-4 2xl:w-44 2xl:m-5"
+      onClick={handleRoute}
     >
       <Link to={`/choose/${id}`}>
-        <img src={IMG_URL + poster_path} alt="MOVIE_img" />
+        <img src={IMG_URL + poster_path} alt="MOVIE_img" className="w-full h-auto" />
       </Link>
-      {isInWishlist ? (
-        <button
-          onClick={handleRemoveFromWishlist}
-          className="absolute right-0 z-30 -top-3 p-0 bg-red-500 text-white font-semibold text-2xl border border-solid  lg:text-2xl  lg:-top-4 2xl:text-4xl 2xl:-top-5"
-        >
-          -
-        </button>
-      ) : (
-        <button
-          onClick={handleAddToWishlist}
-          className="absolute right-0 z-30 -top-3 p-0 bg-green-500 text-2xl text-white font-semibold lg:text-2xl  lg:-top-4 2xl:text-4xl border border-solid 2xl:-top-5"
-        >
-          +
-        </button>
-      )}
+      <button
+        onClick={isInWishlist ? handleRemoveFromWishlist : handleAddToWishlist}
+        className={`absolute right-0 z-30 -top-3 p-0 text-2xl font-semibold border border-solid ${
+          isInWishlist ? "bg-red-500 text-white lg:text-2xl lg:-top-4 2xl:text-4xl 2xl:-top-5" : "bg-green-500 text-white lg:text-2xl lg:-top-4 2xl:text-4xl border border-solid 2xl:-top-5"
+        }`}
+      >
+        {isInWishlist ? "-" : "+"}
+      </button>
     </div>
   );
 };

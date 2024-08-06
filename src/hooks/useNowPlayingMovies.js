@@ -4,23 +4,30 @@ import { addNowPlayingMovies } from "../utils/moviesSlice";
 import { useEffect } from "react";
 
 const useNowPlayingMovies = () => {
-
-  const nowPlayingMovies = useSelector((store)=> store.movies.nowPlayingMovies);
-    //fetch the data from tmdb and update the redux store
   const dispatch = useDispatch();
+  const nowPlayingMovies = useSelector((store) => store.movies.nowPlayingMovies);
 
   const getNowPlayingMovies = async () => {
-    const response = await fetch(
-      "https://api.themoviedb.org/3/movie/now_playing?page=1",
-      API_OPTIONS
-    );
-    const data = await response.json();
-    dispatch(addNowPlayingMovies(data.results));
+    try {
+      const response = await fetch(
+        "https://api.themoviedb.org/3/movie/now_playing?page=1",
+        API_OPTIONS
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      const data = await response.json();
+      dispatch(addNowPlayingMovies(data.results));
+    } catch (error) {
+      console.error("Error fetching now playing movies:", error);
+    }
   };
 
   useEffect(() => {
-    !nowPlayingMovies && getNowPlayingMovies();
-  }, []);
+    if (!nowPlayingMovies || nowPlayingMovies.length === 0) {
+      getNowPlayingMovies();
+    }
+  }, [nowPlayingMovies, dispatch]);
 };
 
 export default useNowPlayingMovies;

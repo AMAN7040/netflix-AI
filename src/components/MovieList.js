@@ -54,7 +54,7 @@ const MovieList = ({ title, movies }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 2,
+          initialSlide: 1,
         },
       },
       {
@@ -68,12 +68,12 @@ const MovieList = ({ title, movies }) => {
   };
 
   return (
-    <div className='my-1 px-1'>
+    <div className='my-2 px-2'>
       <h1 className='text-lg px-2 py-2 font-medium text-white md:text-lg md:px-4 lg:text-xl lg:px-5 lg:py-2 2xl:text-2xl 2xl:px-5 2xl:py-2'>{title}</h1>
       {movies && movies.length > 0 ? (
-        <Slider className='flex flex-start mx-8 ' {...settings}>
+        <Slider className='flex flex-start mx-8' {...settings}>
           {movies.map((movie) => (
-            <div key={movie.id}>
+            <div key={movie.id} className='p-1'>
               <MovieCard id={movie.id} poster_path={movie.poster_path} movie={movie} />
             </div>
           ))}
