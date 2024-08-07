@@ -7,45 +7,45 @@ import MovieCard from './MovieCard';
 const MovieList = ({ title, movies }) => {
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: movies.length > 1, // Only infinite if more than 1 movie
     speed: 500,
-    slidesToShow: 8,
+    slidesToShow: movies.length === 1 ? 1 : 8, // Show only 1 slide if there's only one movie
     slidesToScroll: 1,
     initialSlide: 0,
     responsive: [
       {
         breakpoint: 1800,
         settings: {
-          slidesToShow: 7,
-          slidesToScroll: 2,
-          infinite: true,
+          slidesToShow: movies.length === 1 ? 1 : 7,
+          slidesToScroll: 1,
+          infinite: movies.length > 1,
           dots: true,
         },
       },
       {
         breakpoint: 1700,
         settings: {
-          slidesToShow: 6,
+          slidesToShow: movies.length === 1 ? 1 : 6,
           slidesToScroll: 1,
-          infinite: true,
+          infinite: movies.length > 1,
           dots: true,
         },
       },
       {
         breakpoint: 1500,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: movies.length === 1 ? 1 : 4,
           slidesToScroll: 1,
-          infinite: true,
+          infinite: movies.length > 1,
           dots: true,
         },
       },
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: movies.length === 1 ? 1 : 2,
           slidesToScroll: 2,
-          infinite: true,
+          infinite: movies.length > 1,
           dots: true,
         },
       },
@@ -54,7 +54,8 @@ const MovieList = ({ title, movies }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 1,
+          infinite: false,
+          dots: true,
         },
       },
       {
@@ -62,7 +63,8 @@ const MovieList = ({ title, movies }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          initialSlide: 1,
+          infinite: false,
+          dots: true,
         },
       },
       {
@@ -70,6 +72,8 @@ const MovieList = ({ title, movies }) => {
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          infinite: false,
+          dots: true,
         },
       },
     ],
