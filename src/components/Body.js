@@ -16,7 +16,7 @@ const Body = () => {
     {
       path: "/browse",
       element: (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div className="bg-black h-screen w-screen text-white text-lg flex justify-center items-center">Loading...</div>}>
           <Browse />
         </Suspense>
       ),
@@ -24,7 +24,7 @@ const Body = () => {
     {
       path: "/shows",
       element: (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div className="bg-black h-screen w-screen text-white text-lg flex justify-center items-center">Loading...</div>}>
           <Shows />
         </Suspense>
       ),
@@ -32,7 +32,7 @@ const Body = () => {
     {
       path: "/choose/:id",
       element: (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div className="bg-black h-screen w-screen text-white text-lg flex justify-center items-center">Loading...</div>}>
           <Choose />
         </Suspense>
       ),
@@ -40,7 +40,7 @@ const Body = () => {
     {
       path: "/chooseShow/:id",
       element: (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div className="bg-black h-screen w-screen text-white text-lg flex justify-center items-center">Loading...</div>}>
           <ChooseShow />
         </Suspense>
       ),

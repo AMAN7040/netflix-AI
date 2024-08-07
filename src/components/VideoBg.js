@@ -5,6 +5,7 @@ import ReactPlayer from "react-player";
 const VideoBg = ({ movieId }) => {
   const trailer = useSelector((store) => store.movies?.movieTrailer);
   useMovieTrailer(movieId);
+  
 
   return (
     <div className="w-screen h-screen object-cover bg-black">
@@ -18,7 +19,7 @@ const VideoBg = ({ movieId }) => {
         muted
       />
       ) : (
-        <div className="flex justify-center items-center h-full text-white text-lg">
+        <div className="flex justify-center items-center h-screen w-screen text-white text-lg">
         <p>Loading trailer...</p>
       </div>
       )}

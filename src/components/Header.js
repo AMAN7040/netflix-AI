@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { LANGUAGES, NETFLIX_LOGO } from "../utils/constant";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
@@ -24,6 +24,8 @@ const Header = () => {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
+      dispatch(removeUser());
+      navigate("/");
     } catch (error) {
       navigate("/error");
     }
@@ -59,9 +61,12 @@ const Header = () => {
     navigate("/" + e);
   };
 
-  const activeStyle = ({ isActive }) => ({
-    color: isActive ? "red" : "none",
-  });
+  const activeStyle = useMemo(
+    () => ({ isActive }) => ({
+      color: isActive ? "red" : "none",
+    }),
+    []
+  )
 
   return (
     <div className="absolute px-2 w-screen py-2 z-10 md:flex lg:flex 2xl:flex md:py-4 md:px-25 lg:py-2 lg:px-48 2xl:py-2 2xl:px-60">
