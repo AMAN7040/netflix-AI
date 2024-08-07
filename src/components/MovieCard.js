@@ -33,11 +33,11 @@ const MovieCard = ({ id, poster_path, movie }) => {
 
   return (
     <div
-      className="relative w-72 m-5 rounded-sm border border-red-700 hover:scale-105 md:w-56 md:m-6 lg:w-62 lg:m-4 2xl:w-44 2xl:m-5"
+      className="relative w-72 mx-auto my-6 rounded-sm border border-red-700 hover:scale-105 md:w-56 md:mx-6 md:my-6 lg:w-62 lg:mx-4 lg:my-4 2xl:w-44 2xl:mx-5 2xl:my-5"
       onClick={handleRoute}
     >
       <Link to={`/choose/${id}`}>
-        <img src={IMG_URL + poster_path} alt="MOVIE_img" className="w-full h-auto" />
+        <img src={IMG_URL + poster_path} alt="MOVIE_img" className="w-full h-auto object-cover" />
       </Link>
       <button
         onClick={isInWishlist ? handleRemoveFromWishlist : handleAddToWishlist}

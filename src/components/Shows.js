@@ -11,7 +11,7 @@ const Shows = () => {
   return (
     <div className=" w-scren h-screen bg-black">
       <Header />
-      <div className="pt-[20%] md:pt-[14%] lg:pt-[18%] 2xl:pt-[10%] ">
+      <div className="pt-[40%] md:pt-[14%] lg:pt-[18%] 2xl:pt-[10%] ">
         <ShowList title={"TV Shows"} shows={allShow} />
       </div>
     </div>

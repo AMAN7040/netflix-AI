@@ -69,7 +69,7 @@ const Header = () => {
   )
 
   return (
-    <div className="absolute px-2 w-screen py-2 z-10 md:flex lg:flex 2xl:flex md:py-4 md:px-25 lg:py-2 lg:px-48 2xl:py-2 2xl:px-60">
+    <div className="absolute px-0 w-screen py-2 z-10 md:flex md:px-2 lg:flex 2xl:flex md:py-4 md:px-25 lg:py-2 lg:px-48 2xl:py-2 2xl:px-60">
       <img
         className="w-28 mx-36 md:w-32 md:m-1 lg:w-36 lg:m-1 2xl:w-44 2xl:m-1"
         src={NETFLIX_LOGO}
@@ -109,11 +109,11 @@ const Header = () => {
           <div className="flex w-full mx-12 h-10 md:space-x-4 lg:space-x-8 2xl:space-x-8 items-center md:ml-[15%] md:mx-1 lg:w-[40%] lg:ml-[20%] lg:justify-end lg:mx-5 2xl:w-[40%] 2xl:ml-[20%] 2xl:justify-end 2xl:mx-5">
             <select
               onChange={handleLanguageChange}
-              className="text-white text-sm mx-3 px-1 rounded-md cursor-pointer border border-white hover:bg-gray-50 hover:bg-opacity-15 bg-black bg-opacity-60 md:px-1 lg:mx-2 lg:py-1 lg:px-2 lg:text-md 2xl:mx-2 2xl:py-1 2xl:px-2 2xl:text-md"
+              className="text-white text-sm mx-2 px-1 rounded-md cursor-pointer border border-white hover:bg-gray-50 hover:bg-opacity-15 bg-black bg-opacity-60 md:px-1 lg:mx-2 lg:py-1 lg:px-2 lg:text-md 2xl:mx-2 2xl:py-1 2xl:px-2 2xl:text-md"
             >
               {LANGUAGES.map((language) => (
                 <option
-                  className="bg-black bg-opacity-60 w-[15%]"
+                  className="bg-black bg-opacity-60"
                   value={language.identifier}
                   key={language.identifier}
                 >
@@ -123,7 +123,7 @@ const Header = () => {
             </select>
             <button
               onClick={handleGbtToggle}
-              className="w-16 px-2 mx-5 text-white text-sm rounded-md cursor-pointer flex items-center border border-white hover:bg-gray-50 hover:bg-opacity-15 lg:text-lg lg:w-[20%] lg:justify-center lg:mx-2 lg:px-4 2xl:text-lg 2xl:w-[20%] 2xl:justify-center 2xl:mx-2 2xl:px-3"
+              className="w-16 px-2 mx-6 text-white text-sm rounded-md cursor-pointer flex items-center border border-white hover:bg-gray-50 hover:bg-opacity-15 lg:text-lg lg:w-[20%] lg:justify-center lg:mx-2 lg:px-4 2xl:text-lg 2xl:w-[20%] 2xl:justify-center 2xl:mx-2 2xl:px-3"
             >
               {route === "browse" && showGbtSearch ? (
                 lang[langType].home
@@ -140,7 +140,7 @@ const Header = () => {
             <button
               type="button"
               onClick={handleSignOut}
-              className="w-16 h-[70%] text-white text-xs ml-7 rounded-md cursor-pointer lg:text-md lg:ml-5 2xl:w-[25%] 2xl:text-md 2xl:ml-5"
+              className="w-16 h-[70%] text-white text-xs ml-6 rounded-md cursor-pointer lg:text-md lg:ml-5 2xl:w-[25%] 2xl:text-md 2xl:ml-5"
               style={{ backgroundColor: "#ff0000" }}
             >
               {lang[langType].signout}

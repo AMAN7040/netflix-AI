@@ -16,9 +16,9 @@ const ShowCard = ({id, poster_path, }) => {
   
     if(!poster_path) return null;
     return (
-      <div onClick={() => handleRoute(`chooseShow/${id}`)} className='w-72 m-8 rounded-sm border border-red-700 hover:scale-105 md:w-56 md:m-6 lg:w-62 lg:m-5 2xl:w-44 2xl:m-3'>
+      <div onClick={() => handleRoute(`chooseShow/${id}`)} className='w-72 m-auto rounded-sm border border-red-700 hover:scale-105 md:w-56 md:m-6 lg:w-62 lg:m-5 2xl:w-44 2xl:m-3'>
           <Link to={`/chooseShow/${id}`}>
-           <img src={IMG_URL+poster_path} alt='MOVIE_img'/>
+           <img src={IMG_URL+poster_path} alt='MOVIE_img' className='w-full h-auto object-cover'/>
           </Link>
       </div>
     );
