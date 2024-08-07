@@ -28,17 +28,17 @@ const Choose = () => {
   return (
     <div>
       <div
-        className="w-full h-full fixed bg-center bg-cover bg-no-repeat"
+        className="w-full h-screen fixed bg-center bg-cover bg-no-repeat"
         style={{
           backgroundImage: `url('https://image.tmdb.org/t/p/w500${currentChoose.poster_path}')`,
         }}
       ></div>
       <Header />
-      <div className="absolute pt-[45%] w-full bg-[rgba(0,0,0,0.7)] m-auto h-full p-1 text-white md:pt-[20%] lg:pt-[15%] lg:p-5 2xl:pt-[10%] 2xl:p-5 ">
+      <div className="absolute pt-[50%] w-full bg-[rgba(0,0,0,0.7)] m-auto h-full p-1 text-white md:pt-[20%] lg:pt-[15%] lg:p-5 2xl:pt-[10%] 2xl:p-5 ">
         <h1 className="text-lg font-bold text-red-500 text-center mb-2 md:text-lg md:mb-3 lg:text-2xl lg:mb-4 2xl:text-4xl 2xl:mb-4">
           {currentChoose.title}
         </h1>
-        <div className="lg:flex 2xl:flex w-full">
+        <div className="m-auto lg:flex 2xl:flex w-80 md:w-[80%] lg:w-full 2xl:w-full">
           <div className="lg:w-8/12 2xl:w-8/12 object-cover m-auto">
             {currentVideo ? (
               <ReactPlayer
@@ -59,14 +59,14 @@ const Choose = () => {
               <p className="text-center">Loading Clip...</p>
             )}
           </div>
-          <div className="m-auto p-3 opacity-50 md:p-4 lg:w-4/12 lg:p-8 2xl:w-4/12 2xl:p-10">
+          <div className="m-auto p-5 opacity-50 md:p-4 lg:w-4/12 lg:p-8 2xl:w-4/12 2xl:p-10">
             <p className="text-sm italic text-center mb-1 md:text-sm lg:text-md lg:mb-3 2xl:text-lg 2xl:mb-3">
-              {currentChoose.tagline || "No tagline available"}
+              Tagline : {currentChoose.tagline || "No tagline available"}
             </p>
-            <p className="mt-4">
-              {currentChoose.overview || "No overview available"}
+            <p className="mt-4 text-sm md:text-md lg:text-lg 2xl:text-lg">
+              Overview: {currentChoose.overview || "No overview available"}
             </p>
-            <p className="text-sm font-normal m-1 lg:text-md lg:m-3 2xl:text-md 2xl:m-3">
+            <p className="text-xs md:text-sm font-normal m-1 lg:text-md lg:m-3 2xl:text-md 2xl:m-3">
               <strong>Release Date:</strong>{" "}
               {currentChoose.release_date || "Unknown"}
             </p>
@@ -106,7 +106,7 @@ const Choose = () => {
               )}
             </p>
             <p>
-              <strong className="m-3">IMDB ID:</strong>{" "}
+              <strong className="m-1 lg:m-3 2xl:m-3">IMDB ID:</strong>{" "}
               {currentChoose.imdb_id ? (
                 <a
                   href={`https://www.imdb.com/title/${currentChoose.imdb_id}`}

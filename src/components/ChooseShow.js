@@ -14,7 +14,12 @@ const ChooseShow = () => {
 
   // Early return if data is not available
   if (!currentShow) {
-    return <p>Loading show details...</p>;
+    return  <>
+    <Header />
+    <div className="flex items-center justify-center min-h-screen text-white bg-black">
+      <p>Show not found. Please go to Home page</p>
+    </div>
+  </>;
   }
 
   // Destructuring properties from currentShow
@@ -42,11 +47,11 @@ const ChooseShow = () => {
         }}
         aria-label={`${original_name} poster`}
       ></div>
-      <div className="absolute pt-[45%] w-full bg-[rgba(0,0,0,0.7)] m-auto h-full p-1 text-white md:pt-[20%] md:p-3 lg:pt-[15%] lg:p-5 2xl:pt-[10%] 2xl:p-5">
+      <div className="absolute pt-[48%] w-full bg-[rgba(0,0,0,0.7)] m-auto h-full p-1 text-white md:pt-[20%] md:p-3 lg:pt-[15%] lg:p-5 2xl:pt-[10%] 2xl:p-5">
         <h1 className="text-lg font-bold text-red-500 text-center mx-auto mb-2 lg:text-2xl lg:mb-4 2xl:text-4xl 2xl:mb-4">
           {original_name}
         </h1>
-        <div className="lg:flex 2xl:flex w-full">
+        <div className="m-auto lg:flex 2xl:flex w-80 md:w-[80%] lg:w-full 2xl:w-full">
           <div className="lg:w-8/12 2xl:w-8/12 object-cover m-auto ">
             {tvshowVideo ? (
               <iframe
@@ -57,7 +62,7 @@ const ChooseShow = () => {
                 loading="lazy"
               ></iframe>
             ) : (
-              <p>Loading Clip...</p>
+              <p className="text-white font-semibold text-center">Loading Clip...</p>
             )}
           </div>
           <div className="m-auto p-3 opacity-50 lg:w-4/12 lg:p-8 2xl:w-4/12 2xl:p-10">
@@ -66,7 +71,7 @@ const ChooseShow = () => {
                 {tagline}
               </p>
             )}
-            <p className="mt-4">{overview}</p>
+            <p className="mt-4 text-sm md:text-md lg:text-lg 2xl:text-lg">{overview}</p>
             <p className="text-sm font-normal m-1 lg:text-md lg:m-3 2xl:text-md 2xl:m-3">
               <strong>Release Date:</strong> {release_date}
             </p>

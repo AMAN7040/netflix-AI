@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 const VideoTitle = ({ title, overview }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const maxLength = 180; // Maximum number of characters to show
+  const maxLength = 120; // Maximum number of characters to show
 
   const handleToggle = () => setIsExpanded(!isExpanded);
 
