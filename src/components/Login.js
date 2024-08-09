@@ -10,201 +10,174 @@ import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { BACKGROUND_IMAGE_URL } from "../utils/constant";
-import { debounce } from 'lodash';
 
 const Login = () => {
   const [more, setMore] = useState(false);
   const [isSignedIn, setSignedIn] = useState(true);
-  const [emailError, setEmailError] = useState("");
-  const [authError, setAuthError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [nameError, setNameError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const email = useRef(null);
-  const password = useRef(null);
-  const name = useRef(null);
-
+  const [errors, setErrors] = useState({});
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+  const nameRef = useRef(null);
   const dispatch = useDispatch();
 
-  const toggleForm = () => {
-    setSignedIn(!isSignedIn);
-  };
+  const toggleForm = () => setSignedIn(!isSignedIn);
 
-  const handleMore = () => {
-    setMore(true);
-  };
+  const handleMore = () => setMore(true);
 
-  const handleEmailError = debounce(() => {
-    const emailValue = email.current ? email.current.value : "";
+  const validateFields = () => {
+    const emailValue = emailRef.current?.value || "";
+    const passwordValue = passwordRef.current?.value || "";
+    const nameValue = nameRef.current?.value || "";
+    let newErrors = {};
+
     if (!validateEmail(emailValue)) {
-      setEmailError("Please enter a valid Email");
-    } else {
-      setEmailError("");
+      newErrors.email = "Please enter a valid Email";
     }
-  }, 300);
 
-  const handlePasswordError = debounce(() => {
-    const passwordValue = password.current ? password.current.value : "";
     if (!validatePassword(passwordValue)) {
-      setPasswordError(
-        "Your Password must be at least 6 characters, contain at least 1 uppercase & 1 lowercase letter, and 1 digit"
-      );
-    } else {
-      setPasswordError("");
+      newErrors.password =
+        "Your Password must be at least 6 characters, contain at least 1 uppercase & 1 lowercase letter, and 1 digit";
     }
-  }, 300);
 
-  const handleName = debounce(() => {
-    const nameValue = name.current ? name.current.value : "";
-    if (nameValue.trim() === "") {
-      setNameError("Please enter your name");
-    } else {
-      setNameError("");
+    if (!isSignedIn && nameValue.trim() === "") {
+      newErrors.name = "Please enter your name";
     }
-  }, 300);
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
+    if (!validateFields()) return;
 
-  const handleButton = async () => {
-    handleName();
-    handleEmailError();
-    handlePasswordError();
-
-    if (nameError || emailError || passwordError) return;
-
-    setLoading(true);
-
-    try {
-      if (!isSignedIn) {
-        // Signup logic
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          email.current.value,
-          password.current.value
-        );
-        const user = userCredential.user;
-        await updateProfile(user, { displayName: name.current.value });
-        const { uid, email, displayName } = auth.currentUser;
-        dispatch(addUser({ uid, email, displayName }));
-      } else {
-        // Sign in logic
-        await signInWithEmailAndPassword(
-          auth,
-          email.current.value,
-          password.current.value
-        );
-      }
-    } catch (error) {
-      setAuthError(
-        isSignedIn
-          ? `Incorrect password for ${email.current.value} Or User doesn't exist. You can reset your password or try again.`
-          : "Sorry failed to create an account. Please try again"
-      );
-    } finally {
-      setLoading(false);
+    if (!isSignedIn) {
+      // Signup logic
+      createUserWithEmailAndPassword(
+        auth,
+        emailRef.current.value,
+        passwordRef.current.value
+      )
+        .then((userCredential) => {
+          const user = userCredential.user;
+          return updateProfile(user, {
+            displayName: nameRef.current.value,
+          });
+        })
+        .then(() => {
+          const { uid, email, displayName } = auth.currentUser;
+          dispatch(addUser({ uid, email, displayName }));
+        })
+        .catch((error) => {
+          setErrors({ auth: error.message });
+        });
+    } else {
+      // Sign-in logic
+      signInWithEmailAndPassword(
+        auth,
+        emailRef.current.value,
+        passwordRef.current.value
+      )
+        .then((userCredential) => {
+          const { uid, email, displayName } = userCredential.user;
+          dispatch(addUser({ uid, email, displayName }));
+        })
+        .catch(() => {
+          setErrors({
+            auth: `Incorrect password for ${emailRef.current.value} or user doesn't exist. You can reset your password or try again.`,
+          });
+        });
     }
   };
 
   return (
     <section
-      className=" w-full h-screen bg-center bg-cover"
+      className="w-full h-screen bg-center bg-cover"
       style={{ backgroundImage: `url('${BACKGROUND_IMAGE_URL}')` }}
     >
       <div className="w-full h-full bg-[rgba(0,0,0,0.5)]">
         <Header />
         <form
           onSubmit={handleSubmit}
-          className="absolute w-10/12 py-8 px-10 bg-black m-48 md:m-40 md:w-5/12 md:mx-auto md:py-10 md:pr-16 md:pl-10 lg:m-32 lg:w-4/12 lg:mx-auto lg:py-10 lg:pr-16 lg:pl-10 2xl:m-32 2xl:mx-auto 2xl:py-10 2xl:pr-16 2xl:pl-10 right-0 mx-auto left-0 2xl:w-3/12  rounded-lg opacity-75 "
+          className="absolute w-10/12 py-8 px-10 bg-black m-48 md:m-40 md:w-5/12 md:mx-auto md:py-10 md:pr-16 md:pl-10 lg:m-32 lg:w-4/12 lg:mx-auto lg:py-10 lg:pr-16 lg:pl-10 2xl:m-32 2xl:mx-auto 2xl:py-10 2xl:pr-16 2xl:pl-10 right-0 mx-auto left-0 2xl:w-3/12 rounded-lg opacity-75"
         >
           <h1 className="text-xl font-bold text-white mb-4 mx-3 md:text-xl md:mb-6 md:mx-3 lg:text-2xl lg:mb-7 lg:mx-5 2xl:text-3xl 2xl:mb-7 2xl:mx-4">
             {isSignedIn ? "Sign-in" : "Signup"}
           </h1>
-          {authError && (
+
+          {errors.auth && (
             <p
               style={{ color: "#ffff00" }}
               className="text-sm px-2 mb-2 md:px-2 md:mb-3 md:text-sm lg:px-4 lg:mb-4 lg:text-md 2xl:px-4 2xl:mb-4 2xl:text-md"
             >
-              {authError}
+              {errors.auth}
             </p>
           )}
+
           {!isSignedIn && (
             <>
               <input
                 type="text"
-                id="name"
-                ref={name}
+                ref={nameRef}
                 placeholder="Enter your Name"
-                onBlur={handleName}
-                className={`bg-black w-full py-1 px-2 mb-4 border rounded-md opacity-90 text-white md:py-1 md:px-2 md:mx-2 md:mb-2 lg:py-3 lg:px-3 lg:mx-4 lg:mb-3  2xl:py-3 2xl:px-3 2xl:mx-4 2xl:mb-3  ${
-                  nameError ? "border-red-500" : "border-gray-300"
+                onBlur={() => validateFields()}
+                className={`bg-black w-full py-1 px-2 mb-4 border rounded-md opacity-90 text-white md:py-1 md:px-2 md:mx-2 md:mb-2 lg:py-3 lg:px-3 lg:mx-4 lg:mb-3 2xl:py-3 2xl:px-3 2xl:mx-4 2xl:mb-3 ${
+                  errors.name ? "border-red-500" : "border-gray-300"
                 }`}
-                style={
-                  nameError
-                    ? { borderColor: "#ff0000" }
-                    : { borderColor: "gray" }
-                }
                 required
               />
-              {nameError && (
+              {errors.name && (
                 <p
                   style={{ color: "#ff0000" }}
                   className="px-1 mb-1 md:px-2 md:mb-2 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2"
                 >
-                  {nameError}
+                  {errors.name}
                 </p>
               )}
             </>
           )}
+
           <input
             type="email"
-            ref={email}
-            id="email"
+            ref={emailRef}
             placeholder="Enter your Email"
-            onBlur={handleEmailError}
-            className={`bg-black w-full py-1 px-2 mb-4 border rounded-md opacity-90 text-white md:py-1 md:px-2 md:mx-2 md:mb-2 lg:py-3 lg:px-3 lg:mx-4 lg:mb-3  2xl:py-3 2xl:px-3 2xl:mx-4 2xl:mb-3  ${
-              emailError ? "border-red-500" : "border-gray-300"
+            onBlur={() => validateFields()}
+            className={`bg-black w-full py-1 px-2 mb-4 border rounded-md opacity-90 text-white md:py-1 md:px-2 md:mx-2 md:mb-2 lg:py-3 lg:px-3 lg:mx-4 lg:mb-3 2xl:py-3 2xl:px-3 2xl:mx-4 2xl:mb-3 ${
+              errors.email ? "border-red-500" : "border-gray-300"
             }`}
-            style={
-              emailError ? { borderColor: "#ff0000" } : { borderColor: "gray" }
-            }
             required
           />
-          {emailError && (
+          {errors.email && (
             <p
               style={{ color: "#ff0000" }}
               className="px-1 mb-1 md:px-2 md:mb-2 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2"
             >
-              {emailError}
+              {errors.email}
             </p>
           )}
+
           <input
             type="password"
-            ref={password}
-            id="password"
+            ref={passwordRef}
             placeholder="Enter your password"
-            onBlur={handlePasswordError}
-            className={`bg-black w-full py-1 px-2 mb-4 border rounded-md opacity-90 text-white md:py-1 md:px-2 md:mx-2 md:mb-2 lg:py-3 lg:px-3 lg:mx-4 lg:mb-3  2xl:py-3 2xl:px-3 2xl:mx-4 2xl:mb-3 `}
-            style={
-              passwordError
-                ? { borderColor: "#ff0000" }
-                : { borderColor: "gray" }
-            }
+            onBlur={() => validateFields()}
+            className={`bg-black w-full py-1 px-2 mb-4 border rounded-md opacity-90 text-white md:py-1 md:px-2 md:mx-2 md:mb-2 lg:py-3 lg:px-3 lg:mx-4 lg:mb-3 2xl:py-3 2xl:px-3 2xl:mx-4 2xl:mb-3 ${
+              errors.password ? "border-red-500" : "border-gray-300"
+            }`}
             required
           />
-          {passwordError && (
+          {errors.password && (
             <p
               style={{ color: "#ff0000" }}
               className="px-1 mb-1 md:px-2 md:mb-2 lg:px-4 lg:mb-3 2xl:px-4 2xl:mb-2"
             >
-              {passwordError}
+              {errors.password}
             </p>
           )}
+
           <button
             type="submit"
-            onClick={handleButton}
             style={{ backgroundColor: "#ff0000" }}
             className="w-full text-white py-1 px-1 mb-4 rounded-md cursor-pointer md:py-2 md:px-2 md:mb-3 md:mx-2 lg:py-2 lg:px-3 lg:mb-5 lg:mx-4 2xl:py-2 2xl:px-3 2xl:mb-5 2xl:mx-4"
           >
@@ -218,24 +191,29 @@ const Login = () => {
               onClick={toggleForm}
             >
               {isSignedIn ? "Sign up now" : "Sign-in now"}
-            </span>{" "}
-          </p>
-          <p className="text-gray-400 px-2 py-1 mb-2 text-[11px] md:py-2 md:mb-3 md:px-2 md:text-xs lg:px-5 lg:py-3 lg:mb-3 lg:text-xs 2xl:px-5 2xl:py-3 2xl:mb-3 2xl:text-xs">
-            This page is protected by Google reCAPTCHA to ensure you're not a
-            bot.
-            <span
-              className="text-blue-700 hover:underline"
-              onClick={handleMore}
-            >
-              Learn more.
             </span>
           </p>
+
+          <p className="text-gray-400 py-1 px-2 md:py-2 md:mb-2 md:px-2 lg:px-5 lg:py-3 2xl:px-5 2xl:py-3">
+            This page is protected by Google reCAPTCHA to ensure you're not a
+            bot.
+            {!more && (
+              <span
+                className="text-blue-600 cursor-pointer hover:underline"
+                onClick={handleMore}
+              >
+                {" "}
+                Learn more.
+              </span>
+            )}
+          </p>
+
           {more && (
-            <p className="text-gray-400 px-2 py-1 mb-2 text-[11px]  md:py-2 md:mb-3 md:px-2 md:text-xs lg:px-5 lg:py-3 ;g:mb-3 lg:text-xs 2xl:px-5 2xl:py-3 2xl:mb-3 2xl:text-xs">
+            <p className="text-gray-400 py-1 px-2 md:py-2 md:px-2 lg:px-5 lg:py-3 2xl:px-5 2xl:py-3">
               The information collected by Google reCAPTCHA is subject to the
               Google Privacy Policy and Terms of Service, and is used for
               providing, maintaining, and improving the reCAPTCHA service and
-              for general security purposes (it is not used for personalised
+              for general security purposes (it is not used for personalized
               advertising by Google).
             </p>
           )}
