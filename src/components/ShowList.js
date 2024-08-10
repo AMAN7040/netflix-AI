@@ -64,7 +64,7 @@ const ShowList = ({ title, shows }) => {
           slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 1,
-        },
+        },     
       },
       {
         breakpoint: 480,

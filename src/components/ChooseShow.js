@@ -41,17 +41,17 @@ const ChooseShow = () => {
     <div>
       <Header />
       <div
-        className="w-full h-screen fixed bg-center bg-cover"
+        className="w-full h-screen fixed bg-center bg-cover bg-no-repeat"
         style={{
           backgroundImage: `url('https://image.tmdb.org/t/p/w500${poster_path}')`,
         }}
         aria-label={`${original_name} poster`}
       ></div>
-      <div className="absolute pt-[48%] w-full bg-[rgba(0,0,0,0.7)] m-auto h-full p-1 text-white md:pt-[20%] md:p-3 lg:pt-[15%] lg:p-5 2xl:pt-[10%] 2xl:p-5">
+      <div className="absolute pt-[12rem] w-full bg-[rgba(0,0,0,0.7)] m-auto min-h-full p-1 text-white md:pt-[9rem] lg:pt-[11rem] lg:p-5 2xl:pt-[10rem] 2xl:p-5">
         <h1 className="text-lg font-bold text-red-500 text-center mx-auto mb-2 lg:text-2xl lg:mb-4 2xl:text-4xl 2xl:mb-4">
           {original_name}
         </h1>
-        <div className="m-auto lg:flex 2xl:flex w-80 md:w-[80%] lg:w-full 2xl:w-full">
+        <div className="m-auto lg:flex 2xl:flex w-[85%] md:w-[80%] lg:w-full 2xl:w-full">
           <div className="lg:w-8/12 2xl:w-8/12 object-cover m-auto ">
             {tvshowVideo ? (
               <iframe
@@ -71,25 +71,27 @@ const ChooseShow = () => {
                 {tagline}
               </p>
             )}
-            <p className="mt-4 text-sm md:text-md lg:text-lg 2xl:text-lg">{overview}</p>
-            <p className="text-sm font-normal m-1 lg:text-md lg:m-3 2xl:text-md 2xl:m-3">
+            <p className="mt-4 text-sm md:text-md lg:text-[15px] 2xl:text-lg">
+              Overview: {overview || "No overview available"}
+            </p>
+            <p className="text-sm font-normal m-1 lg:text-md lg:mx-auto lg:my-3 2xl:my-3 2xl:text-md 2xl:mx-auto">
               <strong>Release Date:</strong> {release_date}
             </p>
-            <p className="text-sm font-normal m-1 lg:text-md lg:m-3 2xl:text-md 2xl:m-3">
+            <p className="text-sm font-normal m-1 lg:text-md lg:mx-auto lg:my-3 2xl:my-3 2xl:text-md 2xl:mx-auto">
               <strong>Runtime:</strong> {runtime} minutes
             </p>
-            <p className="text-sm font-normal m-1 lg:text-md lg:m-3 2xl:text-md 2xl:m-3">
+            <p className="text-sm font-normal m-1 lg:text-md lg:mx-auto lg:my-3 2xl:my-3 2xl:text-md 2xl:mx-auto">
               <strong>Genres:</strong>{" "}
               {genres.map((genre) => genre.name).join(", ")}
             </p>
-            <p className="text-sm font-normal m-1 lg:text-md lg:m-3 2xl:text-md 2xl:m-3">
+            <p className="text-sm font-normal m-1 lg:text-md lg:mx-auto lg:my-3 2xl:my-3 2xl:text-md 2xl:mx-auto">
               <strong>Vote Average:</strong> {vote_average}
             </p>
-            <p className="text-sm font-normal m-1 lg:text-md lg:m-3 2xl:text-md 2xl:m-3">
+            <p className="text-sm font-normal m-1 lg:text-md lg:mx-auto lg:my-3 2xl:my-3 2xl:text-md 2xl:mx-auto">
               <strong>Vote Count:</strong> {vote_count}
             </p>
             {homepage && (
-              <p className="text-sm font-normal m-1 lg:text-md lg:m-3 2xl:text-md 2xl:m-3">
+              <p className="text-sm font-normal m-1 lg:text-md lg:mx-auto lg:my-3 2xl:my-3 2xl:text-md 2xl:mx-auto">
                 <strong>Homepage:</strong>{" "}
                 <a
                   href={homepage}

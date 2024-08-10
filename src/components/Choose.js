@@ -55,7 +55,7 @@ const Choose = () => {
                   },
                 }}
               />
-            ) : (
+            ) : (  
               <p className="text-center">Loading Clip...</p>
             )}
           </div>

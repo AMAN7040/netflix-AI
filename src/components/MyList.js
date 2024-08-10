@@ -17,7 +17,7 @@ const MyList = () => {
   return (
     <div className=" w-screen h-screen bg-black">
       <Header />
-      <div className="pt-[40%] md:pt-[14%] lg:pt-[23%] 2xl:pt-[12%]">
+      <div className="pt-[10.5rem] md:pt-[9rem] lg:pt-[10rem] 2xl:pt-[10rem]">
         <MovieList title={"Your Wishlist"} movies={extractedData} />
       </div>
       

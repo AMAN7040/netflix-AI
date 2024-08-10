@@ -103,21 +103,21 @@ const GbtSearchBar = () => {
   };
 
   return (
-    <div className="pt-[45%] justify-center md:pt-[13%] lg:pt-[12%] 2xl:pt-[10%] flex">
+    <div className="pt-[10rem] justify-center md:pt-[8rem] lg:pt-[8rem] 2xl:pt-[7.5rem] flex">
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="bg-black opacity-75 my-3 mx-2 grid grid-cols-12 w-full rounded-md md:w-9/12 lg:w-1/2 2xl:w-1/2"
+        className="bg-black opacity-75 my-3 mx-2 grid grid-cols-12 w-[30rem] rounded-md md:w-[40rem] lg:w-[50rem] 2xl:w-[55rem]"
       >
         <input
           type="text"
           ref={searchText}
           onChange={handleInputChange}
           placeholder={lang[langType].gptSearchPlaceholder}
-          className="col-span-8 mx-4 my-5 py-2 text-[10px] rounded-md text-black font-medium md:col-span-8 md:m-5 md:text-[11px] lg:col-span-8 lg:m-5 lg:text-[13px] 2xl:col-span-8 2xl:m-4 2xl:text-[16px]"
+          className="col-span-8 mx-4 my-5 py-2 text-[0.65rem] rounded-md text-black font-medium md:col-span-8 md:m-5 md:text-[0.9rem] lg:col-span-8 lg:m-5 lg:text-[1rem] 2xl:col-span-8 2xl:m-4 2xl:text-[1.2rem]"
         />
         <button
           type="button"
-          className="col-span-2 mx-3 my-5 rounded-lg text-[9px] md:col-span-2 md:m-5 md:text-[11px] lg:col-span-2 lg:m-5 lg:text-[15px] 2xl:col-span-2 2xl:p-3 2xl:m-5 2xl:text-text-[16px]"
+          className="col-span-2 mx-3 my-5 rounded-lg text-[0.65rem] md:col-span-2 md:m-5 md:text-[0.9rem] lg:col-span-2 lg:m-5 lg:text-[1rem] 2xl:col-span-2 2xl:p-3 2xl:m-5 2xl:text-text-[1.1rem]"
           onClick={handleSearchResult}
           style={{ backgroundColor: "#ff0000", color: "#ffffff" }}
         >
@@ -125,7 +125,7 @@ const GbtSearchBar = () => {
         </button>
         <button
           type="button"
-          className="col-span-1 mx- my-5 text-[9px] rounded-lg md:col-span-2 md:m-5 md:text-[11px] lg:col-span-2 lg:m-5 lg:text-[15px] 2xl:col-span-2 2xl:p-3 2xl:m-5 2xl:text-text-[16px]"
+          className="col-span-1 mx- my-5 text-[0.65rem] rounded-lg md:col-span-2 md:m-5 md:text-[0.9rem] lg:col-span-2 lg:m-5 lg:text-[1rem] 2xl:col-span-2 2xl:p-3 2xl:m-5 2xl:text-text-[1.1rem]"
           onClick={handleClearMovie}
           style={{ backgroundColor: "#ff0000", color: "#ffffff" }}
         >

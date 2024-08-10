@@ -100,7 +100,7 @@ const Login = () => {
         <Header />
         <form
           onSubmit={handleSubmit}
-          className="absolute w-10/12 py-8 px-10 bg-black m-48 md:m-40 md:w-5/12 md:mx-auto md:py-10 md:pr-16 md:pl-10 lg:m-32 lg:w-4/12 lg:mx-auto lg:py-10 lg:pr-16 lg:pl-10 2xl:m-32 2xl:mx-auto 2xl:py-10 2xl:pr-16 2xl:pl-10 right-0 mx-auto left-0 2xl:w-3/12 rounded-lg opacity-75"
+          className="absolute w-[20rem] py-8 px-10 bg-black m-[12rem] md:m-40 md:w-[25rem] md:mx-auto md:py-10 md:pr-16 md:pl-10 lg:m-32 lg:w-[28rem] lg:mx-auto lg:py-10 lg:pr-16 lg:pl-10 2xl:m-32 2xl:mx-auto 2xl:py-10 2xl:pr-16 2xl:pl-10 right-0 mx-auto left-0 2xl:w-[32rem] rounded-lg opacity-75"
         >
           <h1 className="text-xl font-bold text-white mb-4 mx-3 md:text-xl md:mb-6 md:mx-3 lg:text-2xl lg:mb-7 lg:mx-5 2xl:text-3xl 2xl:mb-7 2xl:mx-4">
             {isSignedIn ? "Sign-in" : "Signup"}
@@ -184,7 +184,7 @@ const Login = () => {
             {isSignedIn ? "Sign-in" : "Signup"}
           </button>
 
-          <p className="text-gray-400 px-1 py-1 mb-1 md:py-2 md:mb-3 md:px-2 lg:px-5 lg:py-3 lg:mb-2 2xl:px-5 2xl:py-3 2xl:mb-2 ">
+          <p className="text-[0.9rem] text-gray-400 px-1 py-1 mb-1 md:py-2 md:mb-3 md:px-2 md:text-[1rem] lg:text-[1.1rem] lg:px-5 lg:py-3 lg:mb-2 2xl:text-[1.2rem] 2xl:px-5 2xl:py-3 2xl:mb-2 ">
             {isSignedIn ? "New to Netflix?" : "Already Registered?"}
             <span
               className="text-white mx-1 cursor-pointer hover:underline md:px-1 lg:mx-5 2xl:mx-5"
@@ -194,7 +194,7 @@ const Login = () => {
             </span>
           </p>
 
-          <p className="text-gray-400 py-1 px-2 md:py-2 md:mb-2 md:px-2 lg:px-5 lg:py-3 2xl:px-5 2xl:py-3">
+          <p className="text-[0.7rem] text-gray-400 py-1 px-2 md:text-[0.8rem] md:py-2 md:mb-2 md:px-2  lg:text-[0.9rem] lg:px-5 lg:py-3 2xl:lg:text-[1rem] 2xl:px-4 2xl:py-2">
             This page is protected by Google reCAPTCHA to ensure you're not a
             bot.
             {!more && (
@@ -209,7 +209,7 @@ const Login = () => {
           </p>
 
           {more && (
-            <p className="text-gray-400 py-1 px-2 md:py-2 md:px-2 lg:px-5 lg:py-3 2xl:px-5 2xl:py-3">
+            <p className=" text-[0.7rem] text-gray-400 py-1 px-2 md:py-2 md:text-[0.8rem] md:px-2 lg:text-[0.9rem] lg:px-5 lg:py-3 2xl:text-[1rem] 2xl:px-4 2xl:py-2">
               The information collected by Google reCAPTCHA is subject to the
               Google Privacy Policy and Terms of Service, and is used for
               providing, maintaining, and improving the reCAPTCHA service and
