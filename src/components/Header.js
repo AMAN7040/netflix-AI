@@ -77,7 +77,7 @@ const Header = () => {
     <div className="absolute px-0 w-screen py-2 z-10 md:flex md:px-[2rem] lg:flex  2xl:flex md:py-7 lg:py-8 lg:px-[3rem] 2xl:py-2 2xl:px-[10rem]">
       <div className="flex justify-center  md:justify-normal lg:flex-none 2xl:justify-normal">
         <img
-          className=" w-28 mx-36 md:w-32 md:mx-1 lg:w-40 lg:m-1 2xl:w-44 2xl:m-1"
+          className=" w-28 mx-36 md:w-32 md:mx-1 lg:w-40 lg:m-1 2xl:w-44 2xl:mx-1 2xl:-my-1"
           src={NETFLIX_LOGO}
           alt="LOGO"
         />
